@@ -32,7 +32,7 @@
               </div>
                
               <div class="col text-center">
-                <a href="/user" class="text-decoration-none"><img src="./images/CircleSquared-Black.svg" class="logo-home"/></a> 
+                <a href="/user" class="text-decoration-none"><img src="{{asset('images/CircleSquared-Black.svg')}}" class="logo-home"/></a> 
               </div>
               <div class="col-2 text-end">
                 
@@ -68,8 +68,8 @@
                                   PROJECT
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <li><a class="dropdown-item" href="{{route('projects.list')}}">My Projects</a></li>
-                                  <li><a class="dropdown-item" href="{{route('projects.add')}}">Add Project</a></li>
+                                  <li><a class="dropdown-item" href="#">My Projects</a></li>
+                                  <li><a class="dropdown-item" href="#">Add Project</a></li>
                                   <li><hr class="dropdown-divider"></li>
                                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                                 </ul>
@@ -96,9 +96,25 @@
                 </div><!-- div-navbar -->
             </div>
 
-            <div class="row">
-              <div class="col">DASHBOARD</div>
+            <div class="row my-4">
+              <div class="col">MY PROJECTS</div>
             </div>
+            <hr>
+
+            <div class="row">
+              <div class="col">
+                <div style="text-align:center;padding-top:35px;border-radius:50%;background:#aaa;height:100px;width:100px;border:1px solid #999">PROJECT 1</div>
+              </div>
+              <div class="col">
+                <div style="text-align:center;padding-top:35px;border-radius:50%;background:#aaa;height:65px;width:65px;border:1px solid #999"></div>
+                Add Test
+              </div>
+              <div class="col">
+                <div style="text-align:center;padding-top:35px;border-radius:50%;background:#aaa;height:65px;width:65px;border:1px solid #999"></div>
+                Add Test Suites
+              </div>
+            </div>
+
          </div>
     </div>
 

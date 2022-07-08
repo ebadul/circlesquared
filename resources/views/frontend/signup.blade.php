@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="./css/styles.css" rel="stylesheet" />
-
+    <link rel="icon" href="{{asset('images/favicon.png')}}" type="image/gif" sizes="16x16">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
 
     <title>CircleSquared</title>
   </head>
-  <body class="login home-bg align-items-center">
+  <body class="login login-bg align-items-center">
     
     <div class="container-fluid">
         <div class="container">
