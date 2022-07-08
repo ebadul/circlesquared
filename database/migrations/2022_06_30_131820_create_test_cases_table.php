@@ -25,7 +25,7 @@ class CreateTestCasesTable extends Migration
             $table->text('testcase_steps_when')->nullable();
             $table->text('testcase_steps_then')->nullable();
             $table->text('testcase_steps_and')->nullable();
-            $table->bigInteger('project_admin')->nullable();
+            $table->unsignedBigInteger('project_admin')->index();
             $table->string('testsuite_id')->nullable();
             $table->string('testcase_status')->nullable();
             $table->string('testcase_severity')->nullable();
