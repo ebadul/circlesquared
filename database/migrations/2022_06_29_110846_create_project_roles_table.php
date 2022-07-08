@@ -17,7 +17,7 @@ class CreateProjectRolesTable extends Migration
             $table->id();
             $table->string('project_id');
             $table->string('role_id');
-            $table->bigInteger('user_id');
+            $table->string('user_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
