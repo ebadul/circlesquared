@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TestCaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,10 @@ Route::get('signup-success', [HomeController::class,'signupSuccess']);
 Route::group(['middleware'=>'auth','prefix'=>'user'],function(){
     Route::get('/', [DashboardController::class,'index'])->name('user.dashboard');
     Route::get('/signout', [DashboardController::class,'signout'])->name('user.signout');
-    Route::get('/projects', [DashboardController::class,'projectsList'])->name('projects.list');
+    Route::get('/projects', [ProjectController::class,'projectsList'])->name('projects.list');
     Route::get('/add-project', [ProjectController::class,'addProject'])->name('projects.add');
     Route::post('/project-store', [ProjectController::class,'addProjectStore'])->name('projects.store');
+    
+    Route::get('/testcases', [TestCaseController::class,'testcasesList'])->name('testcases.list');
+    Route::get('/add-testcases', [TestCaseController::class,'addTestcases'])->name('testcases.add');
 });

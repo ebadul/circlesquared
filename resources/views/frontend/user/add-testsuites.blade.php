@@ -2,7 +2,7 @@
     @section('content')
     <div class="container-fluid">
          <div class="container my-3">
-             @include('frontend.user.header',['title'=>'Add Project'])
+             @include('frontend.user.header',['title'=>'Add Test Suites'])
             <form action="{{route('projects.store')}}" method="post" enctype="multipart/form-data" class="my-4">
                 @csrf
                 <div class="mb-3 row">

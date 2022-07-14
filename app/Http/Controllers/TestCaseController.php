@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Project;
 use Auth;
 
-class ProjectController extends Controller
+class TestCaseController extends Controller
 {
 
     public function projectsList(){
@@ -17,11 +17,11 @@ class ProjectController extends Controller
         return view('frontend.user.projects')->with(compact('projects'));
     }
 
-    public function addProject(){
-        return view('frontend.user.add-project');
+    public function addTestcases(){
+        return view('frontend.user.add-testcases');
     }
 
-    public function addProjectStore(Request $request){
+    public function addTestcasesStore(Request $request){
         $user = Auth::user();
         $data = $request->validate([
             'project_name'=>'required',

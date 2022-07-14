@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Project;
 use Auth;
 
 class DashboardController extends Controller
 {
     public function index(){
-        return view('frontend.user.dashboard');
+        $user = Auth::user();
+        $projects = Project::where('project_admin', $user->id)->get();
+        return view('frontend.user.dashboard')->with(compact('projects'));
+        
     }
 
     public function getLogin(){

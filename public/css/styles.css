@@ -22,9 +22,13 @@
     width: 100%;
  }
 
- .home-sub-heading{
-     
- }
+.project-thumb{
+    height:130px;
+    width:130px;
+    padding:15px;
+    background-size: cover;
+    background-image: url(https://static.thenounproject.com/png/3348332-200.png);
+}
 
  .home-content-area {
     margin:0px;
