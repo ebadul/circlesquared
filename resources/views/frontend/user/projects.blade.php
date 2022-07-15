@@ -5,6 +5,7 @@
          <div class="container my-3">
             
          @include('frontend.user.header',['title'=>'Projects'])
+
             @if($projects)
               @foreach($projects as $project)
               <div class="row my-3">
@@ -14,7 +15,7 @@
                   </div>
                 </div>
                 <div class="col d-flex align-items-center d-grid gap-2">
-                  <a href="{{route('testcases.add')}}">
+                  <a href="{{route('testcases.add',$project->id)}}">
                     <img src="{{asset('images/circle.jpg')}}" style="border-radius:50%" class="img-thumbnail" height="auto" width="65">
                     Add Test
                   </a>
@@ -26,7 +27,7 @@
               </div>
               @endforeach
             @else
-
+                <h4>No projects</h4>
             @endif
 
 

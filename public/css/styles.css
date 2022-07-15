@@ -11,6 +11,11 @@
     background-color: aquamarine;
 }
 
+.dashboard .project-logo{
+    width: 100px;
+    height: 100px;
+}
+
 .logo-home{
     width: 200px;
     height: auto;

@@ -1,6 +1,6 @@
 @extends('frontend.user.user-layout')
     @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid dashboard">
          <div class="container my-3">
              @include('frontend.user.header',['title'=>'Dashboard'])
             
@@ -8,12 +8,18 @@
              <div class="row my-5">
                   @foreach($projects as $project)
                   <div class="col">
-                  <div class="row align-items-center d-flex mx-5">
-                    <img src="{{isset($project->project_logo_path)?$project->project_logo_path:'images/projects/project_placeholder.png'}}" height="auto" width="auto" onerror="images/projects/project_placeholder.png">
-                  </div>
-                  <div class="row align-items-center d-flex">
-                    <h5 class="text-center">{{$project->project_name}}</h5>
-                  </div>
+                    <div class="row align-items-center justify-content-center d-flex mx-5">
+                      @php
+                      if(isset($project->project_logo_path) && $project->project_logo_path){
+                        $logo_path= $project->project_logo_path;
+                      }else{
+                        $logo_path= "images/projects/project_placeholder.png";
+                      }
+                      @endphp
+                      <img class="project-logo" src="{{isset($logo_path)?$logo_path:'images/projects/project_placeholder.png'}}"  onerror="images/projects/project_placeholder.png">
+                      <h5 class="text-center">{{$project->project_name}}</h5>
+                    </div>
+                   
                   </div>
                    
                   @endforeach

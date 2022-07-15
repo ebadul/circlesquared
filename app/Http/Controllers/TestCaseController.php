@@ -17,8 +17,8 @@ class TestCaseController extends Controller
         return view('frontend.user.projects')->with(compact('projects'));
     }
 
-    public function addTestcases(){
-        return view('frontend.user.add-testcases');
+    public function addTestcases($project_id  = null){
+        return view('frontend.user.add-testcases')->with(compact('project_id'));
     }
 
     public function addTestcasesStore(Request $request){

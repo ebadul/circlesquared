@@ -32,5 +32,5 @@ Route::group(['middleware'=>'auth','prefix'=>'user'],function(){
     Route::post('/project-store', [ProjectController::class,'addProjectStore'])->name('projects.store');
     
     Route::get('/testcases', [TestCaseController::class,'testcasesList'])->name('testcases.list');
-    Route::get('/add-testcases', [TestCaseController::class,'addTestcases'])->name('testcases.add');
+    Route::get('/add-testcases/{project_id}', [TestCaseController::class,'addTestcases'])->name('testcases.add');
 });
