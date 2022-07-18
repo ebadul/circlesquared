@@ -13,9 +13,20 @@ class EditProjectsTable extends Migration
      */
     public function up()
     {
+
+        if (Schema::hasColumn('projects', 'project_type'))
+        {
+            Schema::table('projects', function (Blueprint $table)
+            {
+                $table->dropColumn('project_type');
+            });
+        }
+
         Schema::table('projects', function (Blueprint $table) {
-             
             $table->string('project_type')->nullable()->after('project_remarks');
+            $table->string('project_description')->nullable()->change();
+            $table->string('project_logo_path')->nullable()->change();
+            $table->string('project_remarks')->nullable()->change();
             
         });
     }
