@@ -12,6 +12,6 @@ class TestCase extends Model
  
  
     protected $fillable = ['project_id','project_code','testcase_name','testcase_precondition',
-                            'expected_result','testcase_steps','testcase_steps_raw','testcase_steps_when',
-                            'testcase_steps_then','testcase_steps_and','project_admin','remarks'];
+                            'expected_result','testcase_steps','testcase_raw_details','testcase_steps_gherkins',
+                            'testcase_steps_classic','testcase_steps_and','project_admin','remarks'];
 }

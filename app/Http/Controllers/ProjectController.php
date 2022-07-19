@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\TestSuite;
+use App\Models\TestCase;
 use Auth;
 
 class ProjectController extends Controller
@@ -15,6 +17,20 @@ class ProjectController extends Controller
         $projects = Project::where('project_admin', $user->id)->get();
         
         return view('frontend.user.projects')->with(compact('projects'));
+    }
+
+    public function projectsDetails($project_id=null){
+        $user = Auth::user();
+        $projects = Project::where('project_admin', $user->id)->where('id',$project_id);
+        $testsuites = "";
+        $testcases = "";
+        if($projects){
+            $project_details = $projects->first();
+            $testsuites = TestSuite::where('project_admin', $user->id)->where('project_id',$project_id)->get();
+            $testcases = TestCase::where('project_admin', $user->id)->where('project_id',$project_id)->get();
+        }
+        
+        return view('frontend.user.project-details')->with(compact('project_details','testsuites', 'testcases'));
     }
 
     public function addProject(){

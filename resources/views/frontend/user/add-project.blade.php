@@ -6,7 +6,7 @@
             <form action="{{route('projects.store')}}" method="post" enctype="multipart/form-data" class="my-4">
                 @csrf
                 <div class="mb-3 row">
-                  <div class="col-5">
+                  <div class="col-4">
                     <label>Project Name</label>
                     <input type="text" name="project_name" id="project_name" class="form-control" required>
                     @if($errors->has('project_name'))
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="mb-3 row">
-                  <div class="col-8">
+                  <div class="col-7">
                     <label>Description</label>
                     <input type="text" name="project_description" id="project_description" class="form-control" required>
                     @if($errors->has('project_description'))
@@ -36,7 +36,7 @@
 
                 <div class="mb-3 row">
                   <div class="row">
-                    <div class="col-8">
+                    <div class="col-7">
                       <label>Project Type</label>
                       <hr>
                     </div>
@@ -70,8 +70,8 @@
                 </div>
 
 
-                <div class="mb-3 row">
-                  <div class="col-8">
+                <div class="mb-3 row mt-4">
+                  <div class="col-7">
                     <input type="submit" name="btnSubmit" id="btnSubmit" value="Add Project" class="btn btn-primary" required>
                   </div>
                   

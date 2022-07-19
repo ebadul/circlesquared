@@ -15,14 +15,16 @@
                   </div>
                 </div>
                 <div class="col d-flex align-items-center d-grid gap-2">
-                  <a href="{{route('testcases.add',$project->id)}}">
+                  <a href="{{route('testcases.add',$project->id)}}" class="text-decoration-none">
                     <img src="{{asset('images/circle.jpg')}}" style="border-radius:50%" class="img-thumbnail" height="auto" width="65">
                     Add Test
                   </a>
                 </div>
                 <div class="col d-flex align-items-center d-grid gap-2">
-                  <img src="{{asset('images/square.jpg')}}" class="img-thumbnail" height="auto" width="45">
-                  Add Test Suites
+                  <a href="{{route('testsuites.add',$project->id)}}" class="text-decoration-none">
+                    <img src="{{asset('images/square.jpg')}}" class="img-thumbnail" height="auto" width="45">
+                    Add Test Suites
+                  </a>
                 </div>
               </div>
               @endforeach
