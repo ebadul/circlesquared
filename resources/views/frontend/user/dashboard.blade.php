@@ -8,7 +8,7 @@
              <div class="row my-5">
                   @foreach($projects as $project)
                   <div class="col">
-                    <div class="row align-items-center justify-content-center d-flex mx-5">
+                    <div class="row align-items-center justify-content-center d-flex m-5">
                       @php
                       if(isset($project->project_logo_path) && $project->project_logo_path){
                         $logo_path= $project->project_logo_path;
