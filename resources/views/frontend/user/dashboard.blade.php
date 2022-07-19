@@ -17,7 +17,11 @@
                       }
                       @endphp
                       <img class="project-logo" src="{{isset($logo_path)?$logo_path:'images/projects/project_placeholder.png'}}"  onerror="images/projects/project_placeholder.png">
-                      <h5 class="text-center">{{$project->project_name}}</h5>
+                      <h5 class="text-center">
+                        <a href="{{route('projects.details',$project->id)}}" class="text-decoration-none">
+                          {{$project->project_name}}
+                        </a>
+                      </h5>
                     </div>
                    
                   </div>
