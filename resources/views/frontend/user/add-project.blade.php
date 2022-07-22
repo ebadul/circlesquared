@@ -8,7 +8,7 @@
                 <div class="mb-3 row">
                   <div class="col-4">
                     <label>Project Name</label>
-                    <input type="text" name="project_name" id="project_name" class="form-control" required>
+                    <input type="text" name="project_name" id="project_name" class="form-control form-control-sm" required>
                     @if($errors->has('project_name'))
                               <div class="text-danger">{{ $errors->first('project_name') }}</div>
                     @endif
@@ -16,7 +16,7 @@
                   </div>
                   <div class="col-3">
                     <label>Project Code</label>
-                    <input type="text" name="project_code" id="project_code" class="form-control" required>
+                    <input type="text" name="project_code" id="project_code" class="form-control  form-control-sm" required>
                     @if($errors->has('project_code'))
                         <div class="text-danger">{{ $errors->first('project_code') }}</div>
                     @endif
@@ -26,12 +26,11 @@
                 <div class="mb-3 row">
                   <div class="col-7">
                     <label>Description</label>
-                    <input type="text" name="project_description" id="project_description" class="form-control" required>
+                    <input type="text" name="project_description" id="project_description" class="form-control  form-control-sm" required>
                     @if($errors->has('project_description'))
                               <div class="text-danger">{{ $errors->first('project_description') }}</div>
                     @endif
                   </div>
-                  
                 </div>
 
                 <div class="mb-3 row">
@@ -64,10 +63,21 @@
                   </div>
 
                   <div class="col-1">
-                    <input type="file" name="project_logo_path" id="project_logo_path" class="file" >
+                    
                   </div>
                   
                 </div>
+
+                <div class="mb-3 row">
+                  <div class="col-7">
+                    <label for="project_logo_path">Attachment</label>
+                    <input type="file" name="project_logo_path" id="project_logo_path" class="form-control form-control-sm" >
+                    @if($errors->has('project_logo_path'))
+                        <div class="text-danger">{{ $errors->first('project_logo_path') }}</div>
+                    @endif
+                  </div>
+                </div>
+
 
 
                 <div class="mb-3 row mt-4">

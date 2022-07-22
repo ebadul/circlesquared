@@ -8,8 +8,8 @@
                 <div class="mb-3 row">
                   <div class="col-5">
                     <label>Test Suite Name</label>
-                    <input type="hidden" name="project_id" id="project_id" value="{{isset($project_id)?$project_id:null}}" class="form-control" required>
-                    <input type="text" name="testsuite_name" id="testsuite_name" class="form-control" required>
+                    <input type="hidden" name="project_id" id="project_id" value="{{isset($project_id)?$project_id:null}}" class="form-control form-control-sm" required>
+                    <input type="text" name="testsuite_name" id="testsuite_name" class="form-control form-control-sm" required>
                     @if($errors->has('testsuite_name'))
                               <div class="text-danger">{{ $errors->first('testsuite_name') }}</div>
                     @endif
@@ -35,7 +35,7 @@
                 <div class="mb-3 row">
                     <div class="col-5">
                         <label>Test Suite Description</label>
-                        <input type="text" name="testsuite_description" id="testsuite_description" class="form-control" required>
+                        <input type="text" name="testsuite_description" id="testsuite_description" class="form-control form-control-sm" required>
                         @if($errors->has('testsuite_description'))
                             <div class="text-danger">{{ $errors->first('testsuite_description') }}</div>
                         @endif
@@ -45,7 +45,7 @@
                 <div class="mb-3 row">
                   <div class="col-5">
                     <label>Test Suite Precondition</label>
-                    <input type="text" name="testsuite_precondition" id="testsuite_precondition" class="form-control" required>
+                    <input type="text" name="testsuite_precondition" id="testsuite_precondition" class="form-control form-control-sm" required>
                     @if($errors->has('testsuite_precondition'))
                               <div class="text-danger">{{ $errors->first('testsuite_precondition') }}</div>
                     @endif

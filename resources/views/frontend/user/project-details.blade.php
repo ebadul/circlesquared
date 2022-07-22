@@ -16,8 +16,8 @@
                       <small>|</small>
                       <small>{{count($testcases)}} test cases</small>
                   </div>
-                  <input type="button" class="btn btn-primary" value="+ Test Suite">
-                  <input type="button" class="btn btn-primary" value="+ Test Case">
+                  <a href="{{route('testsuites.add',$project_details->id)}}" role="button" class="btn btn-primary">+ Test Suite</a>  
+                  <a href="{{route('testcases.add',$project_details->id)}}" role="button" class="btn btn-primary">+ Test Case</a>
                 </div>
               </div>
 

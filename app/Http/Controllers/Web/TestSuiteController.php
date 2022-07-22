@@ -67,7 +67,7 @@ class TestSuiteController extends Controller
 
         Toastr::success('Test suite added successfully','title');
 
-        //return redirect()->route('projects.list');
+        return redirect()->route('projects.details',$request->project_id );
     }
 
     /**

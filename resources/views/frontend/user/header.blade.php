@@ -38,7 +38,7 @@
             </div>
 
             <div class="row">
-              <div class="col">{{$title}}</div>
+              <div class="col"><b>{{$title}}</b></div>
 
             </div>
             <hr/>
