@@ -48,14 +48,13 @@
                             </div>
                             <div class="col-9"><strong>{{strtoupper($suite->testsuite_name)}}</strong></div>
                             <div class="col-1">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16"  id="popDropdown{{$suite->id}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                               </svg>
+                              <ul class="dropdown-menu" aria-labelledby="popDropdown{{$suite->id}}" style="padding:0px">
+                                  <li><a class="dropdown-item" href="{{route('testsuites.delete',$suite->id)}}" onclick="return confirm('Do you want to delete this test suite')">Delete</a></li>
+                              </ul>
                             
-                            
-                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                              </svg> -->
                             </div>
                           </div>
                         @endforeach
@@ -68,7 +67,7 @@
                   @if($testsuites)
                           @foreach($testsuites as $suite)
               
-                              <div class="row bg-light my-3">
+                              <div class="row bg-light py-1 mx-1 border-bottom">
                                   <a class="btn btn-light text-start d-flex d-grid gap-3 align-items-center" data-bs-toggle="collapse" href="#collapseExample-{{strtoupper($suite->id)}}"  aria-expanded="false" aria-controls="collapseExample-{{strtoupper($suite->id)}}">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-toggle2-off" viewBox="0 0 16 16">

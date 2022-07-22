@@ -125,4 +125,28 @@ class TestSuiteController extends Controller
     {
         //
     }
+
+
+    
+    public function deleteTestsuites($testsuite_id=null)
+    {
+        if($testsuite_id){
+            $testsuite = TestSuite::find($testsuite_id);
+            $testsuite_tmp = $testsuite;
+            $deleted = "";
+            if( $testsuite){
+                $deleted = $testsuite->delete();
+            }
+
+            if($deleted){
+                Toastr::success('Test case deleted successfully');
+            } 
+
+        }
+
+        return redirect()->route('projects.details',$testsuite_tmp->project_id);
+         
+    }
+
+
 }

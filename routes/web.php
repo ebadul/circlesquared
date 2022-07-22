@@ -42,6 +42,7 @@ Route::group(['middleware'=>'auth','prefix'=>'user'],function(){
 
     Route::get('/testsuites', [TestSuiteController::class,'testsuitesList'])->name('testsuites.list');
     Route::get('/add-testsuites/{project_id}', [TestSuiteController::class,'addTestsuites'])->name('testsuites.add');
+    Route::get('/delete-testsuites/{testsuite_id}', [TestSuiteController::class,'deleteTestsuites'])->name('testsuites.delete');
     Route::post('/testsuites-store', [TestSuiteController::class,'addTestsuitesStore'])->name('testsuites.store');
 
 });
