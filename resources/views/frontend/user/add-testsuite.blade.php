@@ -47,10 +47,9 @@
                     <label>Test Suite Precondition</label>
                     <input type="text" name="testsuite_precondition" id="testsuite_precondition" class="form-control form-control-sm" required>
                     @if($errors->has('testsuite_precondition'))
-                              <div class="text-danger">{{ $errors->first('testsuite_precondition') }}</div>
+                        <div class="text-danger">{{ $errors->first('testsuite_precondition') }}</div>
                     @endif
                   </div>
-                  
                 </div>
 
                 <div class="mb-3 row">
