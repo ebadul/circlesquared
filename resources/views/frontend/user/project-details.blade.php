@@ -211,10 +211,10 @@
 
                                                                         @foreach($classics as $classic_row)
                                                                             <div class="row">
-                                                                              <div class="col-10 border-bottom py-2">
+                                                                              <div class="col-11 border-bottom py-2">
                                                                                 <div class="row">
-                                                                                  <div class="col">{{$inx}}. {{$classic_row["action"]}}</div>
-                                                                                  <div class="col">{{ $classic_row["input"] }}</div>
+                                                                                  <div class="col-4">{{$inx}}. {{$classic_row["action"]}}</div>
+                                                                                  <div class="col-3">{{ $classic_row["input"] }}</div>
                                                                                   <div class="col">{{$classic_row["expected_result"]}}</div>
                                                                                 </div>
                                                                               </div>
@@ -244,11 +244,10 @@
                                                                 </div><!-- col-3 border-start-->
                                                             </div>
 
-
                                                         </div><!-- modal body -->
                                                         <div class="modal-footer">
                                                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                          <button type="button" class="btn btn-primary">Understood</button>
+                                                          <button type="button" class="btn btn-primary">Update Status</button>
                                                         </div>
                                                       </div>
                                                     </div>
@@ -268,9 +267,6 @@
             @else
                 <h4>No projects</h4>
             @endif
-
-
-            
 
          </div>
     </div>
