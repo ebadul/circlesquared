@@ -49,7 +49,7 @@ class ProjectController extends Controller
         $logo_file = $request->file('project_logo_path'); 
         if($request->hasFile('project_logo_path')){
             $file_name = time().'.'.$logo_file->extension();
-            $logo_path = $request->file('project_logo_path')->move('images/projects', $file_name); 
+            $logo_path = $request->file('project_logo_path')->store('images/projects', $file_name); 
             $data = array_merge($data, ['project_admin'=>$user->id,'project_logo_path'=>$logo_path]);
         }else{
             $data = array_merge($data, ['project_admin'=>$user->id,'project_logo_path'=>'']);

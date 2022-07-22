@@ -172,8 +172,6 @@
                       </div>
 
                       
-
-                       
                       <div class="row">
                         <div class="col-9">
                           <input type="button" name="btnAddGerkin" id="btnAddGerkin" value="+ Add Steps" class="btn btn-link">
@@ -183,12 +181,9 @@
 
                       <div class="mb-3 row" id="divRaw">
                         <div class="col-9">
-             
-                          <textarea name="testcase_raw_details" rows="8" id="testcase_raw_details" class="form-control form-control-sm" required>
-
-                          </textarea>
-                          @if($errors->has('raw'))
-                              <div class="text-danger">{{ $errors->first('raw') }}</div>
+                          <textarea name="testcase_raw_details" rows="8" id="testcase_raw_details" class="form-control form-control-sm"></textarea>
+                          @if($errors->has('testcase_raw_details'))
+                              <div class="text-danger">{{ $errors->first('testcase_raw_details') }}</div>
                           @endif
                         </div>
                       </div>

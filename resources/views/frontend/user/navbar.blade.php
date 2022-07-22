@@ -13,12 +13,12 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                   <li><a class="dropdown-item" href="{{route('projects.list')}}">My Projects</a></li>
                                   <li><a class="dropdown-item" href="{{route('projects.add')}}">Add Project</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                  <!-- <li><hr class="dropdown-divider"></li> -->
+                                  <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
                                 </ul>
                               </li>
 
-                              <li class="nav-item dropdown">
+                              <!-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white  text-decoration-none" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   TEST SUITES
                                 </a>
@@ -28,7 +28,7 @@
                                   <li><hr class="dropdown-divider"></li>
                                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                                 </ul>
-                              </li>
+                              </li> -->
 
                              
                             </ul>
