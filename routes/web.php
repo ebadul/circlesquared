@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\TestCaseController;
-use App\Http\Controllers\TestSuiteController;
+use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\DashboardController;
+use App\Http\Controllers\Web\ProjectController;
+use App\Http\Controllers\Web\TestCaseController;
+use App\Http\Controllers\Web\TestSuiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +36,9 @@ Route::group(['middleware'=>'auth','prefix'=>'user'],function(){
     Route::get('/testcases', [TestCaseController::class,'testcasesList'])->name('testcases.list');
     Route::get('/add-testcases/{project_id}', [TestCaseController::class,'addTestcases'])->name('testcases.add');
     Route::post('/testcases-store', [TestCaseController::class,'addTestcasesStore'])->name('testcases.store');
+    Route::get('/delete-testcases/{testcase_id}', [TestCaseController::class,'deleteTestcases'])->name('testcases.delete');
+    Route::get('/details-testcases/{testcase_id}', [TestCaseController::class,'detailsTestcases'])->name('testcases.details');
+    Route::get('/edit-testcases/{testcase_id}', [TestCaseController::class,'editTestcases'])->name('testcases.edit');
 
     Route::get('/testsuites', [TestSuiteController::class,'testsuitesList'])->name('testsuites.list');
     Route::get('/add-testsuites/{project_id}', [TestSuiteController::class,'addTestsuites'])->name('testsuites.add');

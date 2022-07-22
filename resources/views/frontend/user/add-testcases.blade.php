@@ -17,8 +17,8 @@
                       <div class="mb-3 row">
                         <div class="col-9">
                           <label>Test Case Name</label>
-                          <input type="hidden" name="project_id" id="project_id" value="{{isset($project_id)?$project_id:null}}" class="form-control" required>
-                          <input type="text" name="testcase_name" id="testcase_name" class="form-control" required>
+                          <input type="hidden" name="project_id" id="project_id" value="{{isset($project_id)?$project_id:null}}" class="form-control form-control-sm" required>
+                          <input type="text" name="testcase_name" id="testcase_name" class="form-control form-control-sm" required>
                           @if($errors->has('testcase_name'))
                                     <div class="text-danger">{{ $errors->first('testcase_name') }}</div>
                           @endif
@@ -27,7 +27,7 @@
                       <div class="mb-3 row">
                         <div class="col-9">
                           <label>Precondition</label>
-                          <input type="text" name="testcase_precondition" id="testcase_precondition" class="form-control" required>
+                          <input type="text" name="testcase_precondition" id="testcase_precondition" class="form-control form-control-sm" required>
                           @if($errors->has('testcase_precondition'))
                                     <div class="text-danger">{{ $errors->first('testcase_precondition') }}</div>
                           @endif
@@ -37,9 +37,26 @@
                       <div class="mb-3 row">
                         <div class="col-9">
                           <label>Expected Result</label>
-                          <input type="text" name="expected_result" id="expected_result" class="form-control" required>
+                          <input type="text" name="expected_result" id="expected_result" class="form-control form-control-sm" required>
                           @if($errors->has('expected_result'))
                                     <div class="text-danger">{{ $errors->first('expected_result') }}</div>
+                          @endif
+                        </div>
+                      </div>
+
+                      <div class="mt-4 row">
+                        <div class="col-9">
+                          <label for="testsuite_id" class="form-label">Test Suite</label>
+                          <select class="form-select form-select-sm" name="testsuite_id" id="testsuite_id">
+                            @if($testsuites)
+                              @foreach($testsuites as $suite)
+                                <option value="{{$suite->id}}">{{$suite->testsuite_name}}</option>
+                              @endforeach
+                            @endif
+                          </select>
+
+                          @if($errors->has('testsuite_id'))
+                                    <div class="text-danger">{{ $errors->first('testsuite_id') }}</div>
                           @endif
                         </div>
                       </div>
@@ -47,9 +64,7 @@
                       
                       <div class="mt-4 row">
                         <div class="col-9">
-                         
-
-                          <label for="attachment_path" class="form-label">Small file input example</label>
+                          <label for="attachment_path" class="form-label">Attachments</label>
                           <input class="form-control form-control-sm" name="attachment_path" id="attachment_path" type="file">
 
                           @if($errors->has('attachment_path'))
@@ -75,30 +90,47 @@
                         <div class="col-3 d-flex d-grid px-3 justify-content-center">
                           <label class="form-check-label" for="switch_steps_raw">Raw</label>
                           <div class="form-check form-switch ms-2">
-                            <input class="form-check-input" value="testcase_steps_raw" type="checkbox" value="switch_steps_raw" id="switch_steps_raw" checked>
+                            <input class="form-check-input" name="switch_steps_raw" type="checkbox" value="switch_steps_raw" id="switch_steps_raw" checked>
                             <label class="form-check-label" for="switch_steps_raw">Steps</label>
                           </div>
                         </div>
                       </div>
 
                      
-                      <div class="mb-3 mt-3 row" id="divClassic">
+                      <div class="mb-4 mt-3 row" id="divClassic">
 
                         <div class="row">
                           <div class="col-3">
-                          <label class="form-check-label" for="switch_steps_raw">Actions</label>
-                            
-                            <input type="text" name="action_1" id="action_1" placeholder="Open Sign in page" class="form-control form-control-sm">
+                            <label class="form-check-label" for="switch_steps_raw">Actions</label>
+                            <input type="text" name="classic[0][action]" id="classic[0][action]" placeholder="Open Sign in page" class="form-control form-control-sm">
                           </div>
                           <div class="col-3">
                             <label class="form-check-label" for="switch_steps_raw">Input Data</label>
-                            <input type="text" name="input_data_1" id="input_data_1" placeholder="Login / password" class="form-control form-control-sm">
+                            <input type="text" name="classic[0][input]" id="classic[0][input]" placeholder="Login / password" class="form-control form-control-sm">
                           </div>
                           <div class="col-3">
                             <label class="form-check-label" for="switch_steps_raw">Expected Result</label>
-                            <input type="text" name="expected_result_1" id="expected_result_1" placeholder="Popup is opened" class="form-control form-control-sm">
+                            <input type="text" name="classic[0][expected_result]" id="classic[0][expected_result]" placeholder="Popup is opened" class="form-control form-control-sm">
                           </div>
                         </div>
+
+
+                        <div class="row">
+                          <div class="col-3">
+                            <label class="form-check-label" for="switch_steps_raw">Actions</label>
+                            <input type="text" name="classic[1][action]" id="classic[1][action]" placeholder="Open Sign in page" class="form-control form-control-sm">
+                          </div>
+                          <div class="col-3">
+                            <label class="form-check-label" for="switch_steps_raw">Input Data</label>
+                            <input type="text" name="classic[1][input]" id="classic[1][input]" placeholder="Login / password" class="form-control form-control-sm">
+                          </div>
+                          <div class="col-3">
+                            <label class="form-check-label" for="switch_steps_raw">Expected Result</label>
+                            <input type="text" name="classic[1][expected_result]" id="classic[1][expected_result]" placeholder="Popup is opened" class="form-control form-control-sm">
+                          </div>
+                        </div>
+
+
 
                         <div class="row">
                           <div class="col-8">
@@ -108,12 +140,11 @@
                       </div>
 
 
-                      <div class="mb-3 mt-3 row" id="divGherkin">
+                      <div class="mb-4 mt-3 row" id="divGherkin">
 
-                      <div class="row">
+                      <div class="row mb-3">
                         <div class="col-3 d-flex">
-                          
-                          <select class="form-select form-select-sm" name="gerkin_1">
+                          <select class="form-select form-select-sm" name="gerkin[0][action]" id="gerkin[0][action]">
                             <option>Given</option>
                             <option>And</option>
                             <option>Then</option>
@@ -122,11 +153,27 @@
                           </select>
                         </div>
                         <div class="col-6">
-                          <input type="text" name="gerkin_input_1" id="gerkin_input_1" placeholder="Step 1" class="form-control form-control-sm">
+                          <input type="text" name="gerkin[0][steps]" id="gerkin[0][steps]" placeholder="Step 1" class="form-control form-control-sm">
+                        </div> 
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col-3 d-flex">
+                          <select class="form-select form-select-sm" name="gerkin[1][action]" id="gerkin[1][action]">
+                            <option>Given</option>
+                            <option>And</option>
+                            <option>Then</option>
+                            <option>When</option>
+                            <option>But</option>
+                          </select>
                         </div>
-                         
+                        <div class="col-6">
+                          <input type="text" name="gerkin[1][steps]" id="gerkin[1][steps]" placeholder="Step 1" class="form-control form-control-sm">
+                        </div> 
                       </div>
 
+                      
+
+                       
                       <div class="row">
                         <div class="col-9">
                           <input type="button" name="btnAddGerkin" id="btnAddGerkin" value="+ Add Steps" class="btn btn-link">
@@ -137,7 +184,7 @@
                       <div class="mb-3 row" id="divRaw">
                         <div class="col-9">
              
-                          <textarea name="testcase_raw_details" rows="8" id="testcase_raw_details" class="form-control" required>
+                          <textarea name="testcase_raw_details" rows="8" id="testcase_raw_details" class="form-control form-control-sm" required>
 
                           </textarea>
                           @if($errors->has('raw'))

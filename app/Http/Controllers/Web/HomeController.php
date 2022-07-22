@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,15 +9,15 @@ use Auth;
 class HomeController extends Controller
 {
     public function index(){
-        return view('frontend.home');
+        return view('frontend.web.home');
     }
 
     public function getLogin(){
-        return view('frontend.login');
+        return view('frontend.web.login');
     }
 
     public function getSignup(){
-        return view('frontend.signup');
+        return view('frontend.web.signup');
     }
     
     public function postSignup(Request $request){
@@ -44,7 +44,7 @@ class HomeController extends Controller
     }
 
     public function signupSuccess(){
-        return view('frontend.signup-success');
+        return view('frontend.web.signup-success');
     }
 
 

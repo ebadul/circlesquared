@@ -11,4 +11,8 @@ class TestSuite extends Model
 
     protected $fillable = ['testsuite_name','project_id','parent_testsuite_id','testsuite_description',
     'testsuite_precondition','project_admin'];
+
+    public function testcases(){
+        return $this->hasMany(TestCase::class, 'testsuite_id');
+    }
 }

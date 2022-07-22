@@ -23,7 +23,9 @@
         <div class="container">
             <div class="row my-4">
                 <div class="col-2">
-                    <img src="./images/CircleSquared-White.svg" class="logo-home"/>
+                <a href="/" class="text-decoration-none">
+                    <img src="./images/CircleSquared-Black.svg" class="logo-home"/>
+                </a>
                 </div>
                 <div class="col"></div>
                 <div class="col-2">

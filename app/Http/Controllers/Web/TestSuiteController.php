@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Models\TestSuite;
 use App\Http\Requests\StoreTestSuiteRequest;
 use App\Http\Requests\UpdateTestSuiteRequest;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Auth;
+use Toastr;
 
 class TestSuiteController extends Controller
 {
@@ -63,7 +65,9 @@ class TestSuiteController extends Controller
 
         $testsuite = TestSuite::create($data);
 
-        return redirect()->route('projects.list');
+        Toastr::success('Test suite added successfully','title');
+
+        //return redirect()->route('projects.list');
     }
 
     /**
