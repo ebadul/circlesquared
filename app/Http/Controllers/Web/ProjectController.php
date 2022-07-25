@@ -28,9 +28,10 @@ class ProjectController extends Controller
             $project_details = $projects->first();
             $testsuites = TestSuite::where('project_admin', $user->id)->where('project_id',$project_id)->get();
             $testcases = TestCase::where('project_admin', $user->id)->where('project_id',$project_id)->get();
+            $testcasesNoSuites = TestCase::where('project_id',$project_id)->whereNull('testsuite_id')->get();
         }
         
-        return view('frontend.user.project-details')->with(compact('project_details','testsuites', 'testcases'));
+        return view('frontend.user.project-details')->with(compact('project_details','testsuites', 'testcases','testcasesNoSuites'));
     }
 
     public function addProject(){

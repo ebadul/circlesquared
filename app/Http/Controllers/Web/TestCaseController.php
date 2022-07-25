@@ -21,8 +21,10 @@ class TestCaseController extends Controller
     }
 
     public function addTestcases($project_id  = null){
+        $project = Project::where('id',$project_id)->first();
         $testsuites = TestSuite::where('project_id',$project_id)->get();
-        return view('frontend.user.add-testcases')->with(compact('project_id','testsuites'));
+        
+        return view('frontend.user.add-testcases')->with(compact('project_id','testsuites','project'));
     }
 
     public function addTestcasesStore(Request $request){
@@ -37,6 +39,7 @@ class TestCaseController extends Controller
             'test_case_steps'=>'required',
             'testsuite_id'=>'nullable',
             'switch_steps_raw'=>'nullable',
+            'testcase_raw_details'=>'nullable',
         ]);
 
         if($request->test_case_steps=="Gherkin"){
@@ -60,10 +63,6 @@ class TestCaseController extends Controller
             ];
         }
        
-
-        
-
-        
 
         $data = array_merge($data, $data_tmp);
        

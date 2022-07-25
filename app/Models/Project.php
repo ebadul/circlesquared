@@ -16,4 +16,12 @@ class Project extends Model
     public function settings(){
         return $this->hasMany(ProjectSetting::class,'project_id');
     }
+
+    public function testsuites(){
+        return $this->hasMany(TestSuite::class,'project_id');
+    }
+
+    public function testcases(){
+        return $this->hasMany(TestCase::class,'project_id');
+    }
 }

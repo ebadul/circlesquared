@@ -7,7 +7,11 @@
               <div class="row">
                 <div class="col-3">
                   <div class="d-flex align-items-center text-center justify-content-center" style="text-align:center;padding-top:35px;border-radius:50%;background:#aaa;height:100px;width:100px;border:1px solid #999;padding:15px">
-                    {{'Project One'}}
+                    @if($project)  
+                      {{$project->project_name}}
+                    @else
+                      Project
+                    @endif
                   </div>
                 </div>
                 <div class="col">
@@ -98,86 +102,55 @@
 
                      
                       <div class="mb-4 mt-3 row" id="divClassic">
+                          <div class="mb-4 mt-3 row" id="divClassicBody">
+                              <div class="row">
+                                <div class="col-3">
+                                  <label class="form-check-label" for="classic[0][action]">Actions</label>
+                                  <input type="text" name="classic[0][action]" id="classic[0][action]" placeholder="Open Sign in page" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-3">
+                                  <label class="form-check-label" for="classic[0][input]">Input Data</label>
+                                  <input type="text" name="classic[0][input]" id="classic[0][input]" placeholder="Login / password" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-3">
+                                  <label class="form-check-label" for="classic[0][expected_result]">Expected Result</label>
+                                  <input type="text" name="classic[0][expected_result]" id="classic[0][expected_result]" placeholder="Popup is opened" class="form-control form-control-sm">
+                                </div>
+                              </div>
+                          </div><!-- divClassicBody -->
 
-                        <div class="row">
-                          <div class="col-3">
-                            <label class="form-check-label" for="switch_steps_raw">Actions</label>
-                            <input type="text" name="classic[0][action]" id="classic[0][action]" placeholder="Open Sign in page" class="form-control form-control-sm">
+                          <div class="row">
+                            <div class="col-8">
+                              <input type="button" name="btnAddClassic" id="btnAddClassic" value="+ Add Steps" class="btn btn-link">
+                            </div>
                           </div>
-                          <div class="col-3">
-                            <label class="form-check-label" for="switch_steps_raw">Input Data</label>
-                            <input type="text" name="classic[0][input]" id="classic[0][input]" placeholder="Login / password" class="form-control form-control-sm">
-                          </div>
-                          <div class="col-3">
-                            <label class="form-check-label" for="switch_steps_raw">Expected Result</label>
-                            <input type="text" name="classic[0][expected_result]" id="classic[0][expected_result]" placeholder="Popup is opened" class="form-control form-control-sm">
-                          </div>
-                        </div>
-
-
-                        <div class="row">
-                          <div class="col-3">
-                            <label class="form-check-label" for="switch_steps_raw">Actions</label>
-                            <input type="text" name="classic[1][action]" id="classic[1][action]" placeholder="Open Sign in page" class="form-control form-control-sm">
-                          </div>
-                          <div class="col-3">
-                            <label class="form-check-label" for="switch_steps_raw">Input Data</label>
-                            <input type="text" name="classic[1][input]" id="classic[1][input]" placeholder="Login / password" class="form-control form-control-sm">
-                          </div>
-                          <div class="col-3">
-                            <label class="form-check-label" for="switch_steps_raw">Expected Result</label>
-                            <input type="text" name="classic[1][expected_result]" id="classic[1][expected_result]" placeholder="Popup is opened" class="form-control form-control-sm">
-                          </div>
-                        </div>
-
-
-
-                        <div class="row">
-                          <div class="col-8">
-                            <input type="button" name="btnAddClassic" id="btnAddClassic" value="+ Add Steps" class="btn btn-link">
-                          </div>
-                        </div>
-                      </div>
+                      </div><!-- divClassic -->
 
 
                       <div class="mb-4 mt-3 row" id="divGherkin">
-
-                      <div class="row mb-3">
-                        <div class="col-3 d-flex">
-                          <select class="form-select form-select-sm" name="gerkin[0][action]" id="gerkin[0][action]">
-                            <option>Given</option>
-                            <option>And</option>
-                            <option>Then</option>
-                            <option>When</option>
-                            <option>But</option>
-                          </select>
-                        </div>
-                        <div class="col-6">
-                          <input type="text" name="gerkin[0][steps]" id="gerkin[0][steps]" placeholder="Step 1" class="form-control form-control-sm">
-                        </div> 
-                      </div>
-                      <div class="row mb-3">
-                        <div class="col-3 d-flex">
-                          <select class="form-select form-select-sm" name="gerkin[1][action]" id="gerkin[1][action]">
-                            <option>Given</option>
-                            <option>And</option>
-                            <option>Then</option>
-                            <option>When</option>
-                            <option>But</option>
-                          </select>
-                        </div>
-                        <div class="col-6">
-                          <input type="text" name="gerkin[1][steps]" id="gerkin[1][steps]" placeholder="Step 1" class="form-control form-control-sm">
-                        </div> 
-                      </div>
-
-                      
-                      <div class="row">
-                        <div class="col-9">
-                          <input type="button" name="btnAddGerkin" id="btnAddGerkin" value="+ Add Steps" class="btn btn-link">
-                        </div>
-                      </div>
-                      </div>
+                          <div class="divGherkinBody">
+                              <div class="row mb-3">
+                                <div class="col-3 d-flex">
+                                  <select class="form-select form-select-sm" name="gerkin[0][action]" id="gerkin[0][action]">
+                                    <option>Given</option>
+                                    <option>And</option>
+                                    <option>Then</option>
+                                    <option>When</option>
+                                    <option>But</option>
+                                  </select>
+                                </div>
+                                <div class="col-6">
+                                  <input type="text" name="gerkin[0][steps]" id="gerkin[0][steps]" placeholder="Step 1" class="form-control form-control-sm">
+                                </div> 
+                              </div>
+                          </div><!-- divGherkinBody -->
+                                            
+                          <div class="row">
+                            <div class="col-9">
+                              <input type="button" name="btnAddGherkin" id="btnAddGherkin" value="+ Add Steps" class="btn btn-link">
+                            </div>
+                          </div>
+                      </div><!-- divGherkins -->
 
                       <div class="mb-3 row" id="divRaw">
                         <div class="col-9">
@@ -236,6 +209,60 @@
                           $('#divClassic').hide();
                       }
                   });
+
+                $('#btnAddClassic').on('click',function(){
+
+                    var Rows =  $('#divClassicBody').children('.row');
+                    var countRow = Rows.length+1;
+                   
+                    var eleClassic = `
+                            <div class="row">
+                              <div class="col-3">
+                                <label class="form-check-label" for="classic[0][action]">Actions</label>
+                                <input type="text" name="classic[${countRow}][action]" id="classic[${countRow}][action]" placeholder="Open Sign in page" class="form-control form-control-sm">
+                              </div>
+                              <div class="col-3">
+                                <label class="form-check-label" for="classic[0][input]">Input Data</label>
+                                <input type="text" name="classic[${countRow}][input]" id="classic[${countRow}][input]" placeholder="Login / password" class="form-control form-control-sm">
+                              </div>
+                              <div class="col-3">
+                                <label class="form-check-label" for="classic[0][expected_result]">Expected Result</label>
+                                <input type="text" name="classic[${countRow}][expected_result]" id="classic[${countRow}][expected_result]" placeholder="Popup is opened" class="form-control form-control-sm">
+                              </div>
+                            </div>`;
+                    $('#divClassicBody').append(eleClassic);
+
+                });
+
+
+
+                $('#btnAddGherkin').on('click',function(){
+
+                  var Rows =  $('#divGherkinBody').children('.row');
+                  var countRow = Rows.length+1;
+
+                  var eleGherkin = `
+                              <div class="row mb-3">
+                                <div class="col-3 d-flex">
+                                  <select class="form-select form-select-sm" name="gerkin[0][action]" id="gerkin[0][action]">
+                                    <option>Given</option>
+                                    <option>And</option>
+                                    <option>Then</option>
+                                    <option>When</option>
+                                    <option>But</option>
+                                  </select>
+                                </div>
+                                <div class="col-6">
+                                  <input type="text" name="gerkin[0][steps]" id="gerkin[0][steps]" placeholder="Step 1" class="form-control form-control-sm">
+                                </div> 
+                              </div>
+                           `;
+
+                           console.log('gherkins: ', countRow, eleGherkin);
+                  $('#divGherkinBody').append(eleGherkin);
+
+                  });
+
               });
             </script>
 
