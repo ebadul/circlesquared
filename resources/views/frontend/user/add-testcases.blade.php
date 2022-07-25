@@ -102,7 +102,7 @@
 
                      
                       <div class="mb-4 mt-3 row" id="divClassic">
-                          <div class="mb-4 mt-3 row" id="divClassicBody">
+                          <div class="row" id="divClassicBody">
                               <div class="row">
                                 <div class="col-3">
                                   <label class="form-check-label" for="classic[0][action]">Actions</label>
@@ -128,7 +128,7 @@
 
 
                       <div class="mb-4 mt-3 row" id="divGherkin">
-                          <div class="divGherkinBody">
+                          <div id="divGherkinBody">
                               <div class="row mb-3">
                                 <div class="col-3 d-flex">
                                   <select class="form-select form-select-sm" name="gerkin[0][action]" id="gerkin[0][action]">
@@ -235,28 +235,23 @@
                 });
 
 
-
                 $('#btnAddGherkin').on('click',function(){
 
                   var Rows =  $('#divGherkinBody').children('.row');
                   var countRow = Rows.length+1;
 
-                  var eleGherkin = `
-                              <div class="row mb-3">
-                                <div class="col-3 d-flex">
-                                  <select class="form-select form-select-sm" name="gerkin[0][action]" id="gerkin[0][action]">
-                                    <option>Given</option>
-                                    <option>And</option>
-                                    <option>Then</option>
-                                    <option>When</option>
-                                    <option>But</option>
-                                  </select>
-                                </div>
-                                <div class="col-6">
-                                  <input type="text" name="gerkin[0][steps]" id="gerkin[0][steps]" placeholder="Step 1" class="form-control form-control-sm">
-                                </div> 
-                              </div>
-                           `;
+                  var eleGherkin = `<div class="row mb-3"><div class="col-3 d-flex">
+                                        <select class="form-select form-select-sm" name="gerkin[${countRow}][action]" id="gerkin[${countRow}][action]">
+                                          <option>Given</option>
+                                          <option>And</option>
+                                          <option>Then</option>
+                                          <option>When</option>
+                                          <option>But</option>
+                                        </select>
+                                      </div>
+                                      <div class="col-6">
+                                        <input type="text" name="gerkin[${countRow}][steps]" id="gerkin[${countRow}][steps]" placeholder="Step 1" class="form-control form-control-sm">
+                                      </div></div>`;
 
                            console.log('gherkins: ', countRow, eleGherkin);
                   $('#divGherkinBody').append(eleGherkin);
