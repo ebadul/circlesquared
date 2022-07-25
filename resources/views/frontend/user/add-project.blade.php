@@ -70,7 +70,7 @@
 
                 <div class="mb-3 row">
                   <div class="col-7">
-                    <label for="project_logo_path">Attachment</label>
+                    <label for="project_logo_path">Project Image</label>
                     <input type="file" name="project_logo_path" id="project_logo_path" class="form-control form-control-sm" >
                     @if($errors->has('project_logo_path'))
                         <div class="text-danger">{{ $errors->first('project_logo_path') }}</div>
