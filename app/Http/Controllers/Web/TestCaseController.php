@@ -72,6 +72,15 @@ class TestCaseController extends Controller
         // $data = array_merge($data, ['project_admin'=>$user->id,'project_logo_path'=>$logo_path]);
         TestCase::create($data);
 
+        $submit = $request->btnAddAnother;
+        Toastr::success('Test case added successfully,<br> Thank you');
+        if($submit){
+            
+            return redirect()->route('testcases.add', $request->project_id );
+        }else{
+            return redirect()->route('projects.details', $request->project_id );
+        }
+
         return redirect()->route('projects.details', $request->project_id );
     }
 
@@ -129,6 +138,7 @@ class TestCaseController extends Controller
         $classic_steps = "";
         $data = $request->validate([
             'project_id'=>'required',
+            'testcase_id'=>'required',
             'testcase_name'=>'required',
             'testcase_precondition'=>'required',
             'expected_result'=>'required',
@@ -138,7 +148,7 @@ class TestCaseController extends Controller
             'testcase_raw_details'=>'nullable',
         ]);
 
-        dd($request->all());
+      
 
         if($request->test_case_steps=="Gherkin"){
             $gherkin_steps = json_encode($request->gerkin,true);
@@ -163,13 +173,19 @@ class TestCaseController extends Controller
        
 
         $data = array_merge($data, $data_tmp);
+        $testcase_id = $data['testcase_id'];
+        unset( $data['testcase_id']);
+        $testcase_row = TestCase::find($testcase_id);
+        if($testcase_row){
+            $testcase_row->update($data);
+        }
        
         // $logo_file = $request->file('project_logo_path'); 
         // $file_name = time().'.'.$logo_file->extension();
         // $logo_path = $request->file('project_logo_path')->move('images\projects', $file_name); 
         // $data = array_merge($data, ['project_admin'=>$user->id,'project_logo_path'=>$logo_path]);
-        TestCase::create($data);
-
+       
+        Toastr::success('Test case updated successfully,<br> Thank you');
         return redirect()->route('projects.details', $request->project_id );
     }
 

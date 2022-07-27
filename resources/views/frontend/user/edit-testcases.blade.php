@@ -22,7 +22,8 @@
                         <div class="col-9">
                           <label>Test Case Name</label>
                           <input type="hidden" name="project_id" id="project_id" value="{{isset($testcase->project_id)?$testcase->project_id:null}}" class="form-control form-control-sm" required>
-                          <input type="text" name="testcase_name" id="testcase_name" class="form-control form-control-sm" required>
+                          <input type="hidden" name="testcase_id" id="testcase_id" value="{{isset($testcase->id)?$testcase->id:null}}" class="form-control form-control-sm" required>
+                          <input type="text" name="testcase_name" id="testcase_name" value="{{$testcase->testcase_name}}" class="form-control form-control-sm" required>
                           @if($errors->has('testcase_name'))
                                     <div class="text-danger">{{ $errors->first('testcase_name') }}</div>
                           @endif
@@ -91,32 +92,41 @@
                           @endif
                         </div>
 
-                        <div class="col-3 d-flex d-grid px-3 justify-content-center">
+                        <div class="col-3 d-flex d-grid px-3 justify-content-center" id="divSwitchStepsRaw">
                           <label class="form-check-label" for="switch_steps_raw">Raw</label>
                           <div class="form-check form-switch ms-2">
-                            <input class="form-check-input" name="switch_steps_raw" type="checkbox" value="switch_steps_raw" id="switch_steps_raw" {{$switch_steps_raw=='switch_steps_raw'?'checked':''}}>
+                            <input class="form-check-input" name="switch_steps_raw" type="checkbox" value="switch_steps_raw" id="switch_steps_raw" {{$testcase->switch_steps_raw=='switch_steps_raw'?'checked':''}}>
                             <label class="form-check-label" for="switch_steps_raw">Steps</label>
                           </div>
                         </div>
                       </div>
 
-                     
+                      @if($testcase->testcase_steps=="Classic")
                       <div class="mb-4 mt-3 row" id="divClassic">
                           <div class="row" id="divClassicBody">
-                              <div class="row">
+                              @php 
+                                  $classic_steps = json_decode($testcase->testcase_steps_classic,true);
+                              @endphp
+                              @foreach($classic_steps as $classic)
+                              <div class="row" id="classicBox-{{$loop->index}}">
                                 <div class="col-3">
-                                  <label class="form-check-label" for="classic[0][action]">Actions</label>
-                                  <input type="text" name="classic[0][action]" id="classic[0][action]" placeholder="Open Sign in page" class="form-control form-control-sm">
+                                
+                                  <label class="form-check-label" for="classic[{{$loop->index}}][action]">Actions</label>
+                                  <input type="text" name="classic[{{$loop->index}}][action]" id="classic[{{$loop->index}}][action]" value="{{$classic['action']}}" placeholder="Open Sign in page" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-3">
-                                  <label class="form-check-label" for="classic[0][input]">Input Data</label>
-                                  <input type="text" name="classic[0][input]" id="classic[0][input]" placeholder="Login / password" class="form-control form-control-sm">
+                                  <label class="form-check-label" for="classic[{{$loop->index}}][input]">Input Data</label>
+                                  <input type="text" name="classic[{{$loop->index}}][input]" id="classic[{{$loop->index}}][input]" value="{{$classic['input']}}" placeholder="Login / password" class="form-control form-control-sm">
                                 </div>
                                 <div class="col-3">
-                                  <label class="form-check-label" for="classic[0][expected_result]">Expected Result</label>
-                                  <input type="text" name="classic[0][expected_result]" id="classic[0][expected_result]" placeholder="Popup is opened" class="form-control form-control-sm">
+                                  <label class="form-check-label" for="classic[{{$loop->index}}][expected_result]">Expected Result</label>
+                                  <input type="text" name="classic[{{$loop->index}}][expected_result]" id="classic[{{$loop->index}}][expected_result]" value="{{$classic['expected_result']}}" placeholder="Popup is opened" class="form-control form-control-sm">
                                 </div>
+                                <div class="col-1 d-flex d-grid gap-2 pt-4 align-items-center text-center justify-content-start">
+                                    <svg width="16px" height="16px" role="button" data-id="{{$loop->index}}" class="deleteClassicBox" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"><title/><path d="M114,100l49-49a9.9,9.9,0,0,0-14-14L100,86,51,37A9.9,9.9,0,0,0,37,51l49,49L37,149a9.9,9.9,0,0,0,14,14l49-49,49,49a9.9,9.9,0,0,0,14-14Z"/></svg>
+                                </div> 
                               </div>
+                              @endforeach
                           </div><!-- divClassicBody -->
 
                           <div class="row">
@@ -125,24 +135,33 @@
                             </div>
                           </div>
                       </div><!-- divClassic -->
+                      @endif
 
-
+                      @if($testcase->testcase_steps=="Gherkin")
                       <div class="mb-4 mt-3 row" id="divGherkin">
                           <div id="divGherkinBody">
-                              <div class="row mb-3">
+                              @php 
+                                  $gherkin_steps = json_decode($testcase->testcase_steps_gherkins,true);
+                              @endphp
+                              @foreach($gherkin_steps as $gherkin)
+                              <div class="row mb-3" id="gherkinBox-{{$loop->index}}">
                                 <div class="col-3 d-flex">
-                                  <select class="form-select form-select-sm" name="gerkin[0][action]" id="gerkin[0][action]">
-                                    <option>Given</option>
-                                    <option>And</option>
-                                    <option>Then</option>
-                                    <option>When</option>
-                                    <option>But</option>
+                                  <select class="form-select form-select-sm" name="gerkin[{{$loop->index}}][action]" id="gerkin[{{$loop->index}}][action]">
+                                    <option {{$gherkin['action']=="Given"?'selected':''}}  >Given</option>
+                                    <option {{$gherkin['action']=="And"?'selected':''}}>And</option>
+                                    <option {{$gherkin['action']=="Then"?'selected':''}}>Then</option>
+                                    <option {{$gherkin['action']=="When"?'selected':''}}>When</option>
+                                    <option {{$gherkin['action']=="But"?'selected':''}}>But</option>
                                   </select>
                                 </div>
-                                <div class="col-6">
-                                  <input type="text" name="gerkin[0][steps]" id="gerkin[0][steps]" placeholder="Step 1" class="form-control form-control-sm">
+                                <div class="col-6 d-flex d-grid gap-2 align-items-center text-center justify-content-center">
+                                  <input type="text" name="gerkin[{{$loop->index}}][steps]" id="gerkin[{{$loop->index}}][steps]" value="{{$gherkin['steps']}}" placeholder="Step 1" class="form-control form-control-sm">
+                                 
+                                  <svg width="16px" height="16px" role="button" data-id="{{$loop->index}}" class="deleteGherkinBox" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"><title/><path d="M114,100l49-49a9.9,9.9,0,0,0-14-14L100,86,51,37A9.9,9.9,0,0,0,37,51l49,49L37,149a9.9,9.9,0,0,0,14,14l49-49,49,49a9.9,9.9,0,0,0,14-14Z"/></svg>
                                 </div> 
+
                               </div>
+                              @endforeach
                           </div><!-- divGherkinBody -->
                                             
                           <div class="row">
@@ -151,8 +170,9 @@
                             </div>
                           </div>
                       </div><!-- divGherkins -->
+                      @endif
 
-                      <div class="mb-3 row" id="divRaw">
+                      <div class="mb-3 row mt-3" id="divRaw">
                         <div class="col-9">
                           <textarea name="testcase_raw_details" rows="8" id="testcase_raw_details" class="form-control form-control-sm"></textarea>
                           @if($errors->has('testcase_raw_details'))
@@ -166,9 +186,7 @@
                         <div class="col-2">
                           <input type="submit" name="btnAddTestCase" id="btnAddTestCase" value="Add TestCase" class="btn btn-primary" required>
                         </div>
-                        <div class="col-3">
-                          <input type="submit" name="btnAddAnother" id="btnAddAnother" value="Save & Create Another" class="btn btn-primary" required>
-                        </div>
+                        
                         <div class="col-2">
                           <input type="submit" name="btnCancel" id="btnCancel" value="Cancel" class="btn btn-primary" required>
                         </div>
@@ -187,8 +205,35 @@
       <script>
               $(document).ready(function(){
                   //$('#mainNavbar').hide();
-                  $('#divRaw').hide();
-                  $('#divClassic').hide();
+                  var steps_raw = "{{$testcase->switch_steps_raw=='switch_steps_raw'?'hide':'show'}}";
+                  var steps_classic_gherkin = "{{$testcase->testcase_steps}}";
+                
+                  if(steps_raw=="hide"){
+                    $('#divRaw').hide();
+                  }else{
+                    $('#divRaw').show();
+                  }
+
+                  if(steps_classic_gherkin=="Classic"){
+                    $('#divClassic').show();
+                    $('#divGherkin').hide();
+                    $('#divSwitchStepsRaw').removeClass('d-flex d-grid');
+                    $('#divSwitchStepsRaw').hide();
+                    $('#divRaw').hide(); 
+
+                  }else{
+                    $('#divClassic').hide();
+                    $('#divGherkin').show();
+                    $('#divSwitchStepsRaw').addClass('d-flex d-grid');
+                    $('#divSwitchStepsRaw').show();
+                    var switch_raw = $('#switch_steps_raw').is(':checked');
+                    if(switch_raw){
+                      $('#divRaw').hide();
+                    }else{
+                      $('#divRaw').show();
+                    }
+                  }
+                  
                   $('#switch_steps_raw').on('click',function(){
                       var chkRaw = $(this).prop('checked');
                       if(chkRaw){
@@ -204,9 +249,22 @@
                       if(test_case_steps=="Classic"){
                           $('#divClassic').show();
                           $('#divGherkin').hide();
+                          $('#divRaw').hide();
+                          $('#divSwitchStepsRaw').hide();
+                          $('#divSwitchStepsRaw').removeClass('d-flex d-grid');
                       }else{
                           $('#divGherkin').show();
                           $('#divClassic').hide();
+                          $('#divSwitchStepsRaw').addClass('d-flex d-grid');
+                          $('#divSwitchStepsRaw').show();
+
+                          var switch_raw = $('#switch_steps_raw').is(':checked');
+
+                          if(switch_raw){
+                            $('#divRaw').hide();
+                          }else{
+                            $('#divRaw').show();
+                          }
                       }
                   });
 
@@ -254,6 +312,16 @@
                                         </div></div>`;
                     $('#divGherkinBody').append(eleGherkin);
 
+                  });
+
+                  $('.deleteGherkinBox').on('click',function(){
+                      var inxd = $(this).data('id');
+                      $('#gherkinBox-'+inxd).remove();
+                  });
+
+                  $('.deleteClassicBox').on('click',function(){
+                      var inxd = $(this).data('id');
+                      $('#classicBox-'+inxd).remove();
                   });
 
               });

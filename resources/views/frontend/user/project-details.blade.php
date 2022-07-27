@@ -71,10 +71,12 @@
                               <div class="row bg-light py-1 mx-1 border-bottom">
                                   <a class="btn btn-light text-start d-flex d-grid gap-3 align-items-center" data-bs-toggle="collapse" href="#collapseExample-{{strtoupper($suite->id)}}"  aria-expanded="false" aria-controls="collapseExample-{{strtoupper($suite->id)}}">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-toggle2-off" viewBox="0 0 16 16">
-                                      <path d="M9 11c.628-.836 1-1.874 1-3a4.978 4.978 0 0 0-1-3h4a3 3 0 1 1 0 6H9z"/>
-                                      <path d="M5 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0 1A5 5 0 1 0 5 3a5 5 0 0 0 0 10z"/>
-                                    </svg>
+                                  <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                      <g>
+                                          <path fill="none" d="M0 0h24v24H0z"/>
+                                          <path d="M11 4h10v2H11V4zm0 4h6v2h-6V8zm0 6h10v2H11v-2zm0 4h6v2h-6v-2zM3 4h6v6H3V4zm2 2v2h2V6H5zm-2 8h6v6H3v-6zm2 2v2h2v-2H5z"/>
+                                      </g>
+                                  </svg>
 
                                       <div>{{strtoupper($suite->testsuite_name)}}</div>
                                       <div class="text-muted"><small class="text-muted">{{count($suite->testcases)>0?count($suite->testcases):''}}</small></div>
@@ -269,12 +271,15 @@
                               <div class="row bg-light py-1 mx-1 border-bottom">
                                   <a class="btn btn-light text-start d-flex d-grid gap-3 align-items-center" data-bs-toggle="collapse" href="#collapseExample-{{strtoupper(1)}}"  aria-expanded="false" aria-controls="collapseExample-{{strtoupper(1)}}">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-toggle2-off" viewBox="0 0 16 16">
-                                      <path d="M9 11c.628-.836 1-1.874 1-3a4.978 4.978 0 0 0-1-3h4a3 3 0 1 1 0 6H9z"/>
-                                      <path d="M5 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0 1A5 5 0 1 0 5 3a5 5 0 0 0 0 10z"/>
-                                    </svg>
+                                  <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                      <g>
+                                          <path fill="none" d="M0 0h24v24H0z"/>
+                                          <path d="M11 4h10v2H11V4zm0 4h6v2h-6V8zm0 6h10v2H11v-2zm0 4h6v2h-6v-2zM3 4h6v6H3V4zm2 2v2h2V6H5zm-2 8h6v6H3v-6zm2 2v2h2v-2H5z"/>
+                                      </g>
+                                  </svg>
 
                                       <div>{{'No Suites'}}</div>
+                                      <small class="small">{{count($testcasesNoSuites)}}</small>
 
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>

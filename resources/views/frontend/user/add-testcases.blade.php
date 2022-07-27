@@ -1,9 +1,13 @@
     @extends('frontend.user.user-layout')
     @section('content')
+   
+    
     <div class="container-fluid">
+
+
          <div class="container my-3">
              @include('frontend.user.header',['title'=>'Add Test Case'])
-
+              
               <div class="row">
                 <div class="col-3">
                   <div class="d-flex align-items-center text-center justify-content-center" style="text-align:center;padding-top:35px;border-radius:50%;background:#aaa;height:100px;width:100px;border:1px solid #999;padding:15px">
@@ -91,7 +95,7 @@
                           @endif
                         </div>
 
-                        <div class="col-3 d-flex d-grid px-3 justify-content-center">
+                        <div class="col-3 d-flex d-grid px-3 justify-content-center" id="divSwitchStepsRaw">
                           <label class="form-check-label" for="switch_steps_raw">Raw</label>
                           <div class="form-check form-switch ms-2">
                             <input class="form-check-input" name="switch_steps_raw" type="checkbox" value="switch_steps_raw" id="switch_steps_raw" checked>
@@ -181,14 +185,41 @@
               </div><!--row-->
 
          </div>
-    </div>
 
+    </div>
     
-      <script>
+    <script>
               $(document).ready(function(){
                   //$('#mainNavbar').hide();
-                  $('#divRaw').hide();
-                  $('#divClassic').hide();
+                  var steps_raw = "hide";
+                  var steps_classic_gherkin = "Gherkin";
+                
+                  if(steps_raw=="hide"){
+                    $('#divRaw').hide();
+                  }else{
+                    $('#divRaw').show();
+                  }
+
+                  if(steps_classic_gherkin=="Classic"){
+                    $('#divClassic').show();
+                    $('#divGherkin').hide();
+                    $('#divSwitchStepsRaw').removeClass('d-flex d-grid');
+                    $('#divSwitchStepsRaw').hide();
+                    $('#divRaw').hide(); 
+
+                  }else{
+                    $('#divClassic').hide();
+                    $('#divGherkin').show();
+                    $('#divSwitchStepsRaw').addClass('d-flex d-grid');
+                    $('#divSwitchStepsRaw').show();
+                    var switch_raw = $('#switch_steps_raw').is(':checked');
+                    if(switch_raw){
+                      $('#divRaw').hide();
+                    }else{
+                      $('#divRaw').show();
+                    }
+                  }
+                  
                   $('#switch_steps_raw').on('click',function(){
                       var chkRaw = $(this).prop('checked');
                       if(chkRaw){
@@ -204,9 +235,22 @@
                       if(test_case_steps=="Classic"){
                           $('#divClassic').show();
                           $('#divGherkin').hide();
+                          $('#divRaw').hide();
+                          $('#divSwitchStepsRaw').hide();
+                          $('#divSwitchStepsRaw').removeClass('d-flex d-grid');
                       }else{
                           $('#divGherkin').show();
                           $('#divClassic').hide();
+                          $('#divSwitchStepsRaw').addClass('d-flex d-grid');
+                          $('#divSwitchStepsRaw').show();
+
+                          var switch_raw = $('#switch_steps_raw').is(':checked');
+
+                          if(switch_raw){
+                            $('#divRaw').hide();
+                          }else{
+                            $('#divRaw').show();
+                          }
                       }
                   });
 
@@ -256,8 +300,18 @@
 
                   });
 
-              });
-            </script>
+                  $('.deleteGherkinBox').on('click',function(){
+                      var inxd = $(this).data('id');
+                      $('#gherkinBox-'+inxd).remove();
+                  });
+
+                  $('.deleteClassicBox').on('click',function(){
+                      var inxd = $(this).data('id');
+                      $('#classicBox-'+inxd).remove();
+                  });
+
+              });  
+    </script>
 
 
 
