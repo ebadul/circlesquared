@@ -67,7 +67,7 @@
                 <div class="col-9">
                   @if($testsuites)
                           @foreach($testsuites as $suite)
-              
+                              
                               <div class="row bg-light py-1 mx-1 border-bottom">
                                   <a class="btn btn-light text-start d-flex d-grid gap-3 align-items-center" data-bs-toggle="collapse" href="#collapseExample-{{strtoupper($suite->id)}}"  aria-expanded="false" aria-controls="collapseExample-{{strtoupper($suite->id)}}">
 
@@ -77,6 +77,7 @@
                                     </svg>
 
                                       <div>{{strtoupper($suite->testsuite_name)}}</div>
+                                      <div class="text-muted"><small class="text-muted">{{count($suite->testcases)>0?count($suite->testcases):''}}</small></div>
 
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -92,7 +93,7 @@
                                     <div class=" card-body no-border">
                                       @if($suite->testcases)
                                             @foreach($suite->testcases as $case)
-                                                <div class="d-flex d-grid  border-bottom  py-2 border-bottom" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$case->id}}">
+                                                <div class="d-flex d-grid  border-bottom  py-2 {{$loop->last?'border-bottom-0':'border-bottom'}} " role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$case->id}}">
                                                     <div class="mx-3 ">
                                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fullscreen-exit" viewBox="0 0 16 16">
                                                         <path d="M5.5 0a.5.5 0 0 1 .5.5v4A1.5 1.5 0 0 1 4.5 6h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5zm5 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 10 4.5v-4a.5.5 0 0 1 .5-.5zM0 10.5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 6 11.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zm10 1a1.5 1.5 0 0 1 1.5-1.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4z"/>
@@ -289,7 +290,7 @@
                                     <div class=" card-body no-border">
 
                                             @foreach($testcasesNoSuites as $caseTmp)
-                                                <div class="d-flex d-grid  border-bottom  py-2 border-bottom" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$caseTmp->id}}">
+                                                <div class="d-flex d-grid    py-2 {{$loop->last?'border-bottom-0':'border-bottom'}}" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$caseTmp->id}}">
                                                     <div class="mx-3 ">
                                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fullscreen-exit" viewBox="0 0 16 16">
                                                         <path d="M5.5 0a.5.5 0 0 1 .5.5v4A1.5 1.5 0 0 1 4.5 6h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5zm5 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 10 4.5v-4a.5.5 0 0 1 .5-.5zM0 10.5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 6 11.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zm10 1a1.5 1.5 0 0 1 1.5-1.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4z"/>

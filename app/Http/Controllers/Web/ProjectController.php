@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\TestSuite;
 use App\Models\TestCase;
 use Auth;
+use Toastr;
 
 class ProjectController extends Controller
 {
@@ -61,6 +62,26 @@ class ProjectController extends Controller
         return redirect()->route('projects.list');
     }
 
+
+    public function deleteProject($project_id=null)
+    {
+        if($project_id){
+            $data = Project::find($project_id);
+            $datae_tmp = $data;
+            $deleted = "";
+            if( $data){
+                $deleted = $data->delete();
+            }
+
+            if($deleted){
+                Toastr::success('Project deleted successfully');
+            } 
+
+        }
+
+        return redirect()->route('projects.list');
+
+    }
  
     
     

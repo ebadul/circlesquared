@@ -30,6 +30,7 @@ Route::group(['middleware'=>'auth','prefix'=>'user'],function(){
     Route::get('/signout', [DashboardController::class,'signout'])->name('user.signout');
     Route::get('/projects', [ProjectController::class,'projectsList'])->name('projects.list');
     Route::get('/project-details/{project_id}', [ProjectController::class,'projectsDetails'])->name('projects.details');
+    Route::get('/delete-project/{project_id}', [ProjectController::class,'deleteProject'])->name('project.delete');
     Route::get('/add-project', [ProjectController::class,'addProject'])->name('projects.add');
     Route::post('/project-store', [ProjectController::class,'addProjectStore'])->name('projects.store');
     
@@ -39,6 +40,7 @@ Route::group(['middleware'=>'auth','prefix'=>'user'],function(){
     Route::get('/delete-testcases/{testcase_id}', [TestCaseController::class,'deleteTestcases'])->name('testcases.delete');
     Route::get('/details-testcases/{testcase_id}', [TestCaseController::class,'detailsTestcases'])->name('testcases.details');
     Route::get('/edit-testcases/{testcase_id}', [TestCaseController::class,'editTestcases'])->name('testcases.edit');
+    Route::post('/edit-testcases-store', [TestCaseController::class,'editTestcasesStore'])->name('testcases.edit.store');
 
     Route::get('/testsuites', [TestSuiteController::class,'testsuitesList'])->name('testsuites.list');
     Route::get('/add-testsuites/{project_id}', [TestSuiteController::class,'addTestsuites'])->name('testsuites.add');

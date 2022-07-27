@@ -237,24 +237,22 @@
 
                 $('#btnAddGherkin').on('click',function(){
 
-                  var Rows =  $('#divGherkinBody').children('.row');
-                  var countRow = Rows.length+1;
+                    var Rows =  $('#divGherkinBody').children('.row');
+                    var countRow = Rows.length+1;
 
-                  var eleGherkin = `<div class="row mb-3"><div class="col-3 d-flex">
-                                        <select class="form-select form-select-sm" name="gerkin[${countRow}][action]" id="gerkin[${countRow}][action]">
-                                          <option>Given</option>
-                                          <option>And</option>
-                                          <option>Then</option>
-                                          <option>When</option>
-                                          <option>But</option>
-                                        </select>
-                                      </div>
-                                      <div class="col-6">
-                                        <input type="text" name="gerkin[${countRow}][steps]" id="gerkin[${countRow}][steps]" placeholder="Step 1" class="form-control form-control-sm">
-                                      </div></div>`;
-
-                           console.log('gherkins: ', countRow, eleGherkin);
-                  $('#divGherkinBody').append(eleGherkin);
+                    var eleGherkin = `<div class="row mb-3"><div class="col-3 d-flex">
+                                          <select class="form-select form-select-sm" name="gerkin[${countRow}][action]" id="gerkin[${countRow}][action]">
+                                            <option>Given</option>
+                                            <option>And</option>
+                                            <option>Then</option>
+                                            <option>When</option>
+                                            <option>But</option>
+                                          </select>
+                                        </div>
+                                        <div class="col-6">
+                                          <input type="text" name="gerkin[${countRow}][steps]" id="gerkin[${countRow}][steps]" placeholder="Step 1" class="form-control form-control-sm">
+                                        </div></div>`;
+                    $('#divGherkinBody').append(eleGherkin);
 
                   });
 

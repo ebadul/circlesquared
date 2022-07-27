@@ -18,9 +18,9 @@
                           </div>
                         </a>
                       </div>
-                      <div class="col-8 text-end text-muted"><small>Test suites: {{count($project->testsuites)}}</small>
+                      <div class="col-8 text-end text-muted"><small>suites: {{count($project->testsuites)}}</small>
                       
-                       <small>Test cases:  {{count($project->testcases)}}</small></div>
+                       <small>cases:  {{count($project->testcases)}}</small></div>
                   </div>
                 </div>
                 <div class="col-3 d-flex align-items-center justify-content-center d-grid gap-2">
@@ -41,7 +41,7 @@
                       <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                     </svg>
                     <ul class="dropdown-menu" aria-labelledby="popDropdown{{$project->id}}" style="padding:0px">
-                        <li><a class="dropdown-item" href="{{route('testsuites.delete',$project->id)}}" onclick="return confirm('Do you want to delete this test suite')">Delete</a></li>
+                        <li><a role="button" href="{{route('project.delete',$project->id)}}" onclick="return confirm('Do you want to delete this project')" class="dropdown-item" data-id="{{$project->id}}">Delete</a></li>
                     </ul>
                 </div>
               </div>
@@ -55,6 +55,33 @@
 
          </div>
     </div>
+
+    <script>
+              $(document).ready(function(){
+                  //$('#mainNavbar').hide();
+                  $('#divRaw').hide();
+                  $('#divClassic').hide();
+                  $('#switch_steps_raw').on('click',function(){
+                      var chkRaw = $(this).prop('checked');
+                      if(chkRaw){
+                          $('#divRaw').hide();
+                      }else{
+                          $('#divRaw').show();
+                      }
+                  });  
+
+                  $('.deleteProject').on('click',function(){
+                     var project_id = $(this).data('id');
+                     var request = $.ajax({
+                                  url: "/form.php",
+                                  type: "post",
+                                  data: serializedData
+                              });
+                  });
+
+              });
+    </script>
+
 
     @endsection
  
