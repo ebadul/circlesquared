@@ -81,70 +81,50 @@ class TestSuiteController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TestSuite  $testSuite
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TestSuite $testSuite)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TestSuite  $testSuite
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TestSuite $testSuite)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTestSuiteRequest  $request
-     * @param  \App\Models\TestSuite  $testSuite
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTestSuiteRequest $request, TestSuite $testSuite)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\TestSuite  $testSuite
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TestSuite $testSuite)
-    {
-        //
-    }
-
-
     
-    public function deleteTestsuites($testsuite_id=null)
+    public function editTestsuites($testsuite_id=null){
+        $user = Auth::user();
+        $testsuite = TestSuite::find($testsuite_id);
+        $project_id = $testsuite->project_id;
+        $testsuites = TestSuite::where('project_id',$project_id)->get();
+        return view('frontend.user.edit-testsuite')->with(compact('testsuite', 'testsuites', 'project_id'));
+    }
+
+    public function copyTestsuites($testsuite_id=null){
+        $user = Auth::user();
+        $testsuite = TestSuite::find($testsuite_id);
+        $project_id = $testsuite->project_id;
+        $testsuites = TestSuite::where('project_id',$project_id)->get();
+        return view('frontend.user.copy-testsuite')->with(compact('testsuite', 'testsuites', 'project_id'));
+    }
+
+    public function editTestsuitesStore(Request $request)
     {
-        if($testsuite_id){
-            $testsuite = TestSuite::find($testsuite_id);
-            $testsuite_tmp = $testsuite;
-            $deleted = "";
+        if($request->testsuite_id){
+            $testsuite = TestSuite::find($request->testsuite_id);
+            $updated = "";
+            $data = $request->validate([
+                'project_id'=>'required',
+                'testsuite_id'=>'required',
+                'testsuite_name'=>'required',
+                'testsuite_description'=>'required',
+                'parent_testsuite_id'=>'nullable'
+            ]);
+
+            unset($data['project_id']);
+            unset($data['testsuite_id']);
+
             if( $testsuite){
-                $deleted = $testsuite->delete();
+                $updated = $testsuite->update( $data);
             }
 
-            if($deleted){
-                Toastr::success('Test case deleted successfully');
+            if($updated){
+                Toastr::success('Test suite updated successfully');
             } 
 
         }
 
-        return redirect()->route('projects.details',$testsuite_tmp->project_id);
+        return redirect()->route('projects.details',$testsuite->project_id);
          
     }
 

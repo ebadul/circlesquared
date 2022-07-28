@@ -39,11 +39,15 @@ Route::group(['middleware'=>'auth','prefix'=>'user'],function(){
     Route::post('/testcases-store', [TestCaseController::class,'addTestcasesStore'])->name('testcases.store');
     Route::get('/delete-testcases/{testcase_id}', [TestCaseController::class,'deleteTestcases'])->name('testcases.delete');
     Route::get('/details-testcases/{testcase_id}', [TestCaseController::class,'detailsTestcases'])->name('testcases.details');
-    Route::get('/edit-testcases/{testcase_id}', [TestCaseController::class,'editTestcases'])->name('testcases.edit');
+    Route::get('/projects/testcases/edit/{testcase_id}', [TestCaseController::class,'editTestcases'])->name('testcases.edit');
+    Route::get('/projects/testcases/copy/{testcase_id}', [TestCaseController::class,'copyTestcases'])->name('testcases.copy');
     Route::post('/edit-testcases-store', [TestCaseController::class,'editTestcasesStore'])->name('testcases.edit.store');
 
     Route::get('/testsuites', [TestSuiteController::class,'testsuitesList'])->name('testsuites.list');
     Route::get('/add-testsuites/{project_id}', [TestSuiteController::class,'addTestsuites'])->name('testsuites.add');
+    Route::get('/projects/testsuites/edit/{testsuite_id}', [TestSuiteController::class,'editTestsuites'])->name('testsuites.edit');
+    Route::get('/projects/testsuites/copy/{testsuite_id}', [TestSuiteController::class,'copyTestsuites'])->name('testsuites.copy');
+    Route::post('/projects/testsuites/edit/store/{testsuite_id}', [TestSuiteController::class,'editTestsuitesStore'])->name('testsuites.edit.store');
     Route::get('/delete-testsuites/{testsuite_id}', [TestSuiteController::class,'deleteTestsuites'])->name('testsuites.delete');
     Route::post('/testsuites-store', [TestSuiteController::class,'addTestsuitesStore'])->name('testsuites.store');
 

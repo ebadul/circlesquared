@@ -76,7 +76,7 @@
                           <input class="form-control form-control-sm" name="attachment_path" id="attachment_path" type="file">
 
                           @if($errors->has('attachment_path'))
-                                    <div class="text-danger">{{ $errors->first('attachment_path') }}</div>
+                              <div class="text-danger">{{ $errors->first('attachment_path') }}</div>
                           @endif
                         </div>
                       </div>

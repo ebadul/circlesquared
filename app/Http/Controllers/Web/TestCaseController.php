@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Project;
 use App\Models\TestSuite;
 use App\Models\TestCase;
+use App\Models\ImagesTestCase;
 use Auth;
 use Toastr;
 
@@ -65,12 +66,16 @@ class TestCaseController extends Controller
        
 
         $data = array_merge($data, $data_tmp);
-       
-        // $logo_file = $request->file('project_logo_path'); 
-        // $file_name = time().'.'.$logo_file->extension();
-        // $logo_path = $request->file('project_logo_path')->move('images\projects', $file_name); 
-        // $data = array_merge($data, ['project_admin'=>$user->id,'project_logo_path'=>$logo_path]);
-        TestCase::create($data);
+ 
+        $testcase = TestCase::create($data);
+
+        if($request->hasFile('attachment_path')){
+            $image_file = $request->file('attachment_path'); 
+            $file_name = time().'.'.$image_file->extension();
+            $attachment_path = $request->file('attachment_path')->move('images/projects/testcases', $file_name); 
+            $data_img =  ['testcase_id'=>$testcase->id, 'attachment_path'=>$attachment_path];
+            ImagesTestCase::create($data_img);
+        } 
 
         $submit = $request->btnAddAnother;
         Toastr::success('Test case added successfully,<br> Thank you');
@@ -128,7 +133,17 @@ class TestCaseController extends Controller
         $project_id = $testcase->project_id;
         $project = Project::where('id',$project_id)->first();
         $testsuites = TestSuite::where('project_id',$project_id)->get();
-        return view('frontend.user.edit-testcases')->with(compact('project','project_id','testsuites','testcase'));
+        return view('frontend.user.edit-testcases')->with(compact('project','project_id',
+                                                                'testsuites','testcase'));
+    }
+
+    public function copyTestcases($testcase_id  = null){
+        $testcase = TestCase::where('id',$testcase_id)->first();
+        $project_id = $testcase->project_id;
+        $project = Project::where('id',$project_id)->first();
+        $testsuites = TestSuite::where('project_id',$project_id)->get();
+        return view('frontend.user.copy-testcases')->with(compact('project','project_id',
+                                                            'testsuites','testcase'));
     }
 
 

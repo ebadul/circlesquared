@@ -15,7 +15,7 @@
                   </div>
                 </div>
                 <div class="col">
-                  <form action="{{route('testcases.edit.store')}}" method="post" enctype="multipart/form-data" class="my-4">
+                  <form action="{{route('testcases.store')}}" method="post" enctype="multipart/form-data" class="my-4">
                       @csrf
 
                       <div class="mb-3 row">
