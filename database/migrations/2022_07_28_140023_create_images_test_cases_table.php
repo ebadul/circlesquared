@@ -18,9 +18,9 @@ class CreateImagesTestCasesTable extends Migration
             $table->unsignedBigInteger('testcase_id')->index()->nullable();
             $table->text('attachment_path')->nullable();
             $table->timestamps();
-            if (Schema::hasForeign($table, 'testcase_id')){
-                $table->dropForeign('testcase_id');
-            }
+            // if (Schema::hasForeign($table, 'testcase_id')){
+            //     $table->dropForeign('testcase_id');
+            // }
             $table->foreign('testcase_id')->references('id')->on('test_cases')->onDelete('cascade');
         });
     }
