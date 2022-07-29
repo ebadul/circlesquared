@@ -28,7 +28,7 @@
                     <label>Description</label>
                     <input type="text" name="project_description" id="project_description" class="form-control  form-control-sm" required>
                     @if($errors->has('project_description'))
-                              <div class="text-danger">{{ $errors->first('project_description') }}</div>
+                        <div class="text-danger">{{ $errors->first('project_description') }}</div>
                     @endif
                   </div>
                 </div>
@@ -65,6 +65,10 @@
                   <div class="col-1">
                     
                   </div>
+
+                  @if($errors->has('project_type'))
+                        <div class="text-danger">{{ $errors->first('project_type') }}</div>
+                  @endif
                   
                 </div>
 
@@ -92,6 +96,23 @@
 
          </div>
     </div>
+
+    <script>
+              $(document).ready(function(){
+                  $('#project_name').on('keyup',function(){
+                    var project_name = $(this).val();
+                    const code_str = project_name.split(" ");
+
+                    //console.log(code_str[0].charAt(0), code_str[1].charAt(0));
+                    $('#project_name').val();
+                  });
+                 
+            
+
+               
+
+              });
+            </script>
 
     @endsection
  

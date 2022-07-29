@@ -113,6 +113,7 @@
                                                   <div class="modal fade" id="staticBackdrop{{$case->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-xl ">
                                                       <div class="modal-content">
+                                                      <form action="{{route('testcases.status.store')}}" method="post" enctype="multipart/form-data" class="my-4">
                                                         <div class="modal-header">
                                                           <h5 class="modal-title" id="staticBackdropLabel">{{$case->testcase_name}}</h5>
                                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -183,7 +184,7 @@
 
                                                                         @foreach($gherkins as $gherkin)
                                                                             <div class="row">
-                                                                              <div class="col-10 border-bottom py-2">
+                                                                              <div class="col-10 {{$loop->last?'':'border-bottom'}} py-2">
                                                                                 <div class="row">
                                                                                   <div class="col">{{$inx}}. {{$gherkin["action"]}}</div>
                                                                                   
@@ -215,7 +216,7 @@
 
                                                                         @foreach($classics as $classic_row)
                                                                             <div class="row">
-                                                                              <div class="col-11 border-bottom py-2">
+                                                                              <div class="col-11 {{$loop->last?'':'border-bottom'}} py-2">
                                                                                 <div class="row">
                                                                                   <div class="col-4">{{$inx}}. {{$classic_row["action"]}}</div>
                                                                                   <div class="col-3">{{ $classic_row["input"] }}</div>
@@ -230,29 +231,56 @@
                                                                   @endif
                                                                 </div>
                                                                 <div class="col-3 border-start">
-                                                                  <div class=" px-3 mb-3"> 
-                                                                      <label for="testcaseStatus">Status</label>
-                                                                      <select id="testcaseStatus" name="testcaseStatus" class="form-select form-select-sm">
-                                                                          <option>Draft</option>
-                                                                          <option>Activated</option>
-                                                                      </select>
-                                                                  </div>
-                                                                  <div class=" px-3 mb-3"> 
-                                                                      <label for="testcaseStatus">Priority</label>
-                                                                      <select id="testcaseStatus" name="testcaseStatus" class="form-select form-select-sm">
-                                                                          <option>High</option>
-                                                                          <option>Medium</option>
-                                                                          <option>Low</option>
-                                                                      </select>
-                                                                  </div>
+                                                                 
+                                                                      @csrf
+                                                                      <input type="hidden" value="{{$case->id}}" name="testcase_id">
+                                                                      <div class=" px-3 mb-3"> 
+                                                                          <label for="severity">Severity</label>
+                                                                          <select id="severity" name="severity" class="form-select form-select-sm">
+                                                                              <option {{$case->testcase_severity=="Blocker"?'selected':''}}>Blocker</option>
+                                                                              <option {{$case->testcase_severity=="Critical"?'selected':''}}>Critical</option>
+                                                                              <option {{$case->testcase_severity=="Major"?'selected':''}}>Major</option>
+                                                                              <option {{$case->testcase_severity=="Normal"?'selected':''}}>Normal</option>
+                                                                              <option {{$case->testcase_severity=="Minor"?'selected':''}}>Minor</option>
+                                                                          </select>
+                                                                      </div>
+                                                                      <div class=" px-3 mb-3"> 
+                                                                          <label for="status">Status</label>
+                                                                          <select id="status" name="status" class="form-select form-select-sm">
+                                                                              <option {{$case->testcase_status=="Actual"?'selected':''}}>Actual</option>
+                                                                              <option {{$case->testcase_status=="Draft"?'selected':''}}>Draft</option>
+                                                                              <option {{$case->testcase_status=="Deprecated"?'selected':''}}>Deprecated</option>
+                                                                          </select>
+                                                                      </div>
+                                                                      <div class=" px-3 mb-3"> 
+                                                                          <label for="priority">Priority</label>
+                                                                          <select id="priority" name="priority" class="form-select form-select-sm">
+                                                                              <option {{$case->testcase_priority=="High"?'selected':''}}>High</option>
+                                                                              <option {{$case->testcase_priority=="Medium"?'selected':''}}>Medium</option>
+                                                                              <option {{$case->testcase_priority=="Low"?'selected':''}}>Low</option>
+                                                                          </select>
+                                                                      </div>
+                                                                      <div class=" px-3 mb-3"> 
+                                                                          <label for="type">Type</label>
+                                                                          <select id="type" name="type" class="form-select form-select-sm">
+                                                                              <option {{$case->testcase_type=="Other"?'selected':''}}>Other</option>
+                                                                              <option {{$case->testcase_type=="Functional"?'selected':''}}>Functional</option>
+                                                                              <option {{$case->testcase_type=="Smoke"?'selected':''}}>Smoke</option>
+                                                                              <option {{$case->testcase_type=="Regression"?'selected':''}}>Regression</option>
+                                                                              <option {{$case->testcase_type=="Security"?'Security':''}}>Security</option>
+                                                                              <option {{$case->testcase_type=="Integration"?'selected':''}}>Integration</option>
+                                                                          </select>
+                                                                      </div>
+                                                                 
                                                                 </div><!-- col-3 border-start-->
                                                             </div>
 
                                                         </div><!-- modal body -->
                                                         <div class="modal-footer">
                                                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                          <button type="button" class="btn btn-primary">Update Status</button>
+                                                          <button type="submit" class="btn btn-primary">Update Status</button>
                                                         </div>
+                                                      </form>
                                                       </div>
                                                     </div>
                                                   </div>
@@ -303,146 +331,172 @@
                                                   <div class="modal fade" id="staticBackdrop{{$caseTmp->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-xl ">
                                                       <div class="modal-content">
-                                                        <div class="modal-header">
-                                                          <h5 class="modal-title" id="staticBackdropLabel">{{$caseTmp->testcase_name}}</h5>
-                                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                           <div class="d-flex d-grid gap-3">
-                                                              <a href="{{route('testcases.edit',$caseTmp->id)}}" role="button" class="btn btn-light">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                                                  <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-                                                                </svg>
-                                                                Edit
-                                                              </a>
-                                                              <a href="{{route('testcases.copy', $caseTmp->id)}}" role="button" class="btn btn-light">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
-                                                                  <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z"/>
-                                                                  <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z"/>
-                                                                </svg>
-                                                                Copy
-                                                              </a>
+                                                        <form action="{{route('testcases.status.store')}}" method="post" enctype="multipart/form-data" class="my-4">
+                                                          <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">{{$caseTmp->testcase_name}}</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                            <div class="d-flex d-grid gap-3">
+                                                                <a href="{{route('testcases.edit',$caseTmp->id)}}" role="button" class="btn btn-light">
+                                                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                                                  </svg>
+                                                                  Edit
+                                                                </a>
+                                                                <a href="{{route('testcases.copy', $caseTmp->id)}}" role="button" class="btn btn-light">
+                                                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
+                                                                    <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z"/>
+                                                                    <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z"/>
+                                                                  </svg>
+                                                                  Copy
+                                                                </a>
 
-                                                              <a href="{{route('testcases.delete', $caseTmp->id)}}" role="button" class="btn btn-light">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
-                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                                </svg>
-                                                                Delete
-                                                              </a>
-                                                           </div>
-
-                                                           <div class="row">
-                                                              <div class="col-9">
-                                                                  <div class="row my-4">
-                                                                      <label>
-                                                                        <strong>Test Case Name</strong>
-                                                                      </label>
-                                                                      <div clss="small">{{$caseTmp->testcase_name}}</div>
-                                                                  </div>
-
-                                                                  <div class="row my-4">
-                                                                      <label>
-                                                                        <strong>Test Case Precondition</strong>
-                                                                      </label>
-                                                                      <div clss="small">{{$caseTmp->testcase_precondition}}</div>
-                                                                  </div>
-
-                                                                  <div class="row my-4">
-                                                                      <label>
-                                                                        <strong>Expected Result</strong>
-                                                                      </label>
-                                                                      <div clss="small">{{$caseTmp->expected_result}}</div>
-                                                                  </div>
-
-                                                                  @if($caseTmp->testcase_steps=="Gherkin")
-                                                                  <div class="row my-4">
-                                                                      <label class="mb-3">
-                                                                        <strong>Steps</strong>
-                                                                      </label>
-                                                                       
-                                                                      <div clss="small">
-                                                                          <div class="row">
-                                                                            <div class="col-5 text-muted">Actions</div>
-                                                                            <div class="col text-muted">Method</div>
-                                                                          </div>
-                                                                        @php
-                                                                            $gherkins = json_decode($caseTmp->testcase_steps_gherkins,true);
-                                                                            $inx = 1;
-                                                                        @endphp
-
-                                                                        @foreach($gherkins as $gherkin)
-                                                                            <div class="row">
-                                                                              <div class="col-10 border-bottom py-2">
-                                                                                <div class="row">
-                                                                                  <div class="col">{{$inx}}. {{$gherkin["action"]}}</div>
-                                                                                  
-                                                                                  <div class="col">{{$gherkin["steps"]}}</div>
-                                                                                </div>
-                                                                              </div>
-                                                                            </div>
-                                                                            <?php $inx+=1; ?>
-                                                                        @endforeach
-                                                                      </div>
-                                                                  </div>
-                                                                  @elseif($caseTmp->testcase_steps=="Classic")
-                                                                  <div class="row my-4">
-                                                                      <label class="mb-3">
-                                                                        <strong>Steps</strong>
-                                                                      </label>
-                                                                       
-                                                                      <div clss="small">
-                                                                          <div class="row">
-                                                                            <div class="col-4 text-muted">Actions</div>
-                                                                            <div class="col-3 text-muted">Input</div>
-                                                                            <div class="col text-muted">Expected Result</div>
-                                                                          </div>
-                                                                        @php
-                                                                            $classics = json_decode($caseTmp->testcase_steps_classic,true);
-                                                                            $inx = 1;
-                                                                            
-                                                                        @endphp
-
-                                                                        @foreach($classics as $classic_row)
-                                                                            <div class="row">
-                                                                              <div class="col-11 border-bottom py-2">
-                                                                                <div class="row">
-                                                                                  <div class="col-4">{{$inx}}. {{$classic_row["action"]}}</div>
-                                                                                  <div class="col-3">{{ $classic_row["input"] }}</div>
-                                                                                  <div class="col">{{$classic_row["expected_result"]}}</div>
-                                                                                </div>
-                                                                              </div>
-                                                                            </div>
-                                                                            <?php $inx+=1; ?>
-                                                                        @endforeach
-                                                                      </div>
-                                                                  </div>
-                                                                  @endif
-                                                                </div>
-                                                                <div class="col-3 border-start">
-                                                                  <div class=" px-3 mb-3"> 
-                                                                      <label for="testcaseStatus">Status</label>
-                                                                      <select id="testcaseStatus" name="testcaseStatus" class="form-select form-select-sm">
-                                                                          <option>Draft</option>
-                                                                          <option>Activated</option>
-                                                                      </select>
-                                                                  </div>
-                                                                  <div class=" px-3 mb-3"> 
-                                                                      <label for="testcaseStatus">Priority</label>
-                                                                      <select id="testcaseStatus" name="testcaseStatus" class="form-select form-select-sm">
-                                                                          <option>High</option>
-                                                                          <option>Medium</option>
-                                                                          <option>Low</option>
-                                                                      </select>
-                                                                  </div>
-                                                                </div><!-- col-3 border-start-->
+                                                                <a href="{{route('testcases.delete', $caseTmp->id)}}" role="button" class="btn btn-light">
+                                                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
+                                                                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                                  </svg>
+                                                                  Delete
+                                                                </a>
                                                             </div>
 
-                                                        </div><!-- modal body -->
-                                                        <div class="modal-footer">
-                                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                          <button type="button" class="btn btn-primary">Update Status</button>
-                                                        </div>
+                                                            <div class="row">
+                                                                <div class="col-9">
+                                                                    <div class="row my-4">
+                                                                        <label>
+                                                                          <strong>Test Case Name</strong>
+                                                                        </label>
+                                                                        <div clss="small">{{$caseTmp->testcase_name}}</div>
+                                                                    </div>
+
+                                                                    <div class="row my-4">
+                                                                        <label>
+                                                                          <strong>Test Case Precondition</strong>
+                                                                        </label>
+                                                                        <div clss="small">{{$caseTmp->testcase_precondition}}</div>
+                                                                    </div>
+
+                                                                    <div class="row my-4">
+                                                                        <label>
+                                                                          <strong>Expected Result</strong>
+                                                                        </label>
+                                                                        <div clss="small">{{$caseTmp->expected_result}}</div>
+                                                                    </div>
+
+                                                                    @if($caseTmp->testcase_steps=="Gherkin")
+                                                                    <div class="row my-4">
+                                                                        <label class="mb-3">
+                                                                          <strong>Steps</strong>
+                                                                        </label>
+                                                                        
+                                                                        <div clss="small">
+                                                                            <div class="row">
+                                                                              <div class="col-5 text-muted">Actions</div>
+                                                                              <div class="col text-muted">Method</div>
+                                                                            </div>
+                                                                          @php
+                                                                              $gherkins = json_decode($caseTmp->testcase_steps_gherkins,true);
+                                                                              $inx = 1;
+                                                                          @endphp
+
+                                                                          @foreach($gherkins as $gherkin)
+                                                                              <div class="row">
+                                                                                <div class="col-10 {{$loop->last?'':'border-bottom'}} py-2">
+                                                                                  <div class="row">
+                                                                                    <div class="col">{{$inx}}. {{$gherkin["action"]}}</div>
+                                                                                    
+                                                                                    <div class="col">{{$gherkin["steps"]}}</div>
+                                                                                  </div>
+                                                                                </div>
+                                                                              </div>
+                                                                              <?php $inx+=1; ?>
+                                                                          @endforeach
+                                                                        </div>
+                                                                    </div>
+                                                                    @elseif($caseTmp->testcase_steps=="Classic")
+                                                                    <div class="row my-4">
+                                                                        <label class="mb-3">
+                                                                          <strong>Steps</strong>
+                                                                        </label>
+                                                                        
+                                                                        <div clss="small">
+                                                                            <div class="row">
+                                                                              <div class="col-4 text-muted">Actions</div>
+                                                                              <div class="col-3 text-muted">Input</div>
+                                                                              <div class="col text-muted">Expected Result</div>
+                                                                            </div>
+                                                                          @php
+                                                                              $classics = json_decode($caseTmp->testcase_steps_classic,true);
+                                                                              $inx = 1;
+                                                                              
+                                                                          @endphp
+
+                                                                          @foreach($classics as $classic_row)
+                                                                              <div class="row">
+                                                                                <div class="col-11 {{$loop->last?'':'border-bottom'}} py-2">
+                                                                                  <div class="row">
+                                                                                    <div class="col-4">{{$inx}}. {{$classic_row["action"]}}</div>
+                                                                                    <div class="col-3">{{ $classic_row["input"] }}</div>
+                                                                                    <div class="col">{{$classic_row["expected_result"]}}</div>
+                                                                                  </div>
+                                                                                </div>
+                                                                              </div>
+                                                                              <?php $inx+=1; ?>
+                                                                          @endforeach
+                                                                        </div>
+                                                                    </div>
+                                                                    @endif
+                                                                  </div>
+                                                                  <div class="col-3 border-start">
+                                                                    @csrf
+                                                                    <input type="hidden" value="{{$case->id}}" name="testcase_id">
+                                                                    <div class=" px-3 mb-3"> 
+                                                                        <label for="severity">SEVERITY</label>
+                                                                        <select id="severity" name="severity" class="form-select form-select-sm">
+                                                                              <option {{$case->testcase_severity=="Blocker"?'selected':''}}>Blocker</option>
+                                                                              <option {{$case->testcase_severity=="Critical"?'selected':''}}>Critical</option>
+                                                                              <option {{$case->testcase_severity=="Major"?'selected':''}}>Major</option>
+                                                                              <option {{$case->testcase_severity=="Normal"?'selected':''}}>Normal</option>
+                                                                              <option {{$case->testcase_severity=="Minor"?'selected':''}}>Minor</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class=" px-3 mb-3"> 
+                                                                        <label for="status">Status</label>
+                                                                        <select id="status" name="status" class="form-select form-select-sm">
+                                                                              <option {{$case->testcase_status=="Actual"?'selected':''}}>Actual</option>
+                                                                              <option {{$case->testcase_status=="Draft"?'selected':''}}>Draft</option>
+                                                                              <option {{$case->testcase_status=="Deprecated"?'selected':''}}>Deprecated</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class=" px-3 mb-3"> 
+                                                                        <label for="priority">Priority</label>
+                                                                        <select id="priority" name="priority" class="form-select form-select-sm">
+                                                                              <option {{$case->testcase_priority=="High"?'selected':''}}>High</option>
+                                                                              <option {{$case->testcase_priority=="Medium"?'selected':''}}>Medium</option>
+                                                                              <option {{$case->testcase_priority=="Low"?'selected':''}}>Low</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class=" px-3 mb-3"> 
+                                                                        <label for="type">Type</label>
+                                                                        <select id="type" name="type" class="form-select form-select-sm">
+                                                                              <option {{$case->testcase_type=="Other"?'selected':''}}>Other</option>
+                                                                              <option {{$case->testcase_type=="Functional"?'selected':''}}>Functional</option>
+                                                                              <option {{$case->testcase_type=="Smoke"?'selected':''}}>Smoke</option>
+                                                                              <option {{$case->testcase_type=="Regression"?'selected':''}}>Regression</option>
+                                                                              <option {{$case->testcase_type=="Security"?'Security':''}}>Security</option>
+                                                                              <option {{$case->testcase_type=="Integration"?'selected':''}}>Integration</option>
+                                                                        </select>
+                                                                    </div>
+                                                                  </div><!-- col-3 border-start-->
+                                                              </div>
+
+                                                          </div><!-- modal body -->
+                                                          <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Update Status</button>
+                                                          </div>
+                                                        </form>
                                                       </div>
                                                     </div>
                                                   </div>

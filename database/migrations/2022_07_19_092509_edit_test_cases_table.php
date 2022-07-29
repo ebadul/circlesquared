@@ -47,6 +47,11 @@ class EditTestCasesTable extends Migration
                 $table->text('testcase_steps_classic')->nullable();
             }
 
+            if (Schema::hasColumn('test_cases', 'testcase_priority')){
+            }else{
+                $table->text('testcase_priority')->nullable()->after('testcase_type');
+            }
+
 
             if (Schema::hasColumn('test_cases', 'switch_steps_raw')){
                  

@@ -89,6 +89,28 @@ class TestCaseController extends Controller
         return redirect()->route('projects.details', $request->project_id );
     }
 
+    public function statusTestcasesStore(Request $request){
+        $user = Auth::user();
+        $updated = "";
+        $data_tmp=[
+            "testcase_severity"=>$request->severity,
+            "testcase_status"=>$request->status,
+            "testcase_type"=>$request->type,
+            "testcase_priority"=>$request->priority,
+        ];
+   
+        $testcase = TestCase::find($request->testcase_id);
+        
+        if($testcase){
+            $updated =  $testcase->update($data_tmp);
+        }
+        if($updated){
+            Toastr::success('Status updated successfully.');
+        }
+        // return redirect()->back('projects.details', $request->project_id );
+        return redirect()->back();
+    }
+
 
     
 

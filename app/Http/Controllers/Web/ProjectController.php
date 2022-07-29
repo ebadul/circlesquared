@@ -42,8 +42,8 @@ class ProjectController extends Controller
     public function addProjectStore(Request $request){
         $user = Auth::user();
         $data = $request->validate([
-            'project_name'=>'required',
-            'project_code'=>'required',
+            'project_name'=>'required|unique:projects',
+            'project_code'=>'required|unique:projects',
             'project_description'=>'required',
             'project_type'=>'required',
         ]);

@@ -41,6 +41,7 @@ Route::group(['middleware'=>'auth','prefix'=>'user'],function(){
     Route::get('/details-testcases/{testcase_id}', [TestCaseController::class,'detailsTestcases'])->name('testcases.details');
     Route::get('/projects/testcases/edit/{testcase_id}', [TestCaseController::class,'editTestcases'])->name('testcases.edit');
     Route::get('/projects/testcases/copy/{testcase_id}', [TestCaseController::class,'copyTestcases'])->name('testcases.copy');
+    Route::post('/projects/testcases/status/store', [TestCaseController::class,'statusTestcasesStore'])->name('testcases.status.store');
     Route::post('/edit-testcases-store', [TestCaseController::class,'editTestcasesStore'])->name('testcases.edit.store');
 
     Route::get('/testsuites', [TestSuiteController::class,'testsuitesList'])->name('testsuites.list');
